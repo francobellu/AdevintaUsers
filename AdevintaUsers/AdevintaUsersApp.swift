@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct AdevintaUsersApp: App {
+
+    // TODO: 1 use DIContainer
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let users = usersMocks()
+            let viewModel = UserListViewModel(users: users)
+            UserListView(viewModel: viewModel)
         }
     }
 }
