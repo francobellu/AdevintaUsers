@@ -21,7 +21,7 @@ struct UserListView: View {
                                     await viewModel.deleteUser(user)
                                 }
                             } label: {
-                                Label("Delete", systemImage: "trash")
+                                Label(viewModel.deleteStr, systemImage: "trash")
                             }
                         }
                 }
@@ -31,12 +31,12 @@ struct UserListView: View {
                         .frame(idealWidth: .infinity, alignment: .center)
                 }
             }
-            .searchable(text: $viewModel.searchTerm, prompt: "Search users")
-            .navigationTitle("Random Users")
+            .searchable(text: $viewModel.searchTerm, prompt: viewModel.searchBarStr)
+            .navigationTitle(viewModel.titleStr)
             .sheet(item: $selectedUser) { user in
                 UserDetailView(user: user)
             }
-            .alert("Error", isPresented: .constant(viewModel.error != nil)) {
+            .alert(viewModel.errorAlertStr, isPresented: .constant(viewModel.error != nil)) {
                 Button("OK") {
                     viewModel.error = nil
                 }

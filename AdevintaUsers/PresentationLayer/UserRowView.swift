@@ -9,32 +9,38 @@ import SwiftUI
 
 struct UserRowView: View {
     let user: User
-
+    
     var body: some View {
-        HStack {
-            Image(systemName: "person.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-
+        if let url = URL(string: user.picture.large) {
+            HStack {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ProgressView()
+                }
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
 
-            VStack(alignment: .leading) {
-                Text("\(user.name) ")
-                    .font(.headline)
-                Text(user.email)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                Text(user.phone)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                VStack(alignment: .leading) {
+                    Text("\(user.name.first) \(user.name.last)")
+                        .font(.headline)
+                    Text(user.email)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Text(user.phone)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
             }
+            .padding(.vertical, 4)
         }
-        .padding(.vertical, 4)
     }
 }
 
 #Preview {
-    let user = usersMocks().first!
+    let user = User.randomMock()
     UserRowView(user: user)
+
 }

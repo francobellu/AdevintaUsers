@@ -10,6 +10,10 @@ class UserListViewModel: ObservableObject {
     @Published var error: Error?
     @Published var searchTerm = ""
 
+    let deleteStr = "Delete"
+    let titleStr = "Adevinta Users"
+    let searchBarStr = "Search users"
+    let errorAlertStr = "Error"
     init(users: [User]) {
         self.users = users
     }
