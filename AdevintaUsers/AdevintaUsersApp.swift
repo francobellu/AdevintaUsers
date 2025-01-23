@@ -10,11 +10,18 @@ import SwiftUI
 @main
 struct AdevintaUsersApp: App {
 
-    // TODO: 1 use DIContainer
+    // TODO: use DIContainer
+
+    // TODO: use real fetchUsersUseCase
+    let fetchUsersUseCase: MockFetchUsersUseCase = {
+        let fetchUsersUseCase = MockFetchUsersUseCase()
+        fetchUsersUseCase.usersResultStub = .success(User.randomMocks(num: 20))
+        return fetchUsersUseCase
+    }()
+
     var body: some Scene {
         WindowGroup {
-            let users = usersMocks(num: 50)
-            let viewModel = UserListViewModel(users: users)
+            let viewModel = UserListViewModel(fetchUsersUseCase: fetchUsersUseCase)
             UserListView(viewModel: viewModel)
         }
     }

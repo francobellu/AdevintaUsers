@@ -1,22 +1,15 @@
 //
-//  TestUtils.swift
+//  UserMocks.swift
 //  AdevintaUsers
 //
 //  Created by Franco Bellu on 23/1/25.
 //
 
-
 import SwiftUI
 
-func usersMocks(num: Int) -> [User] {
-    var result: [User] = []
-    for _ in 0..<num {
-        let user = User.randomMock()
-        result.append(user)
-    }
-    return result
-}
+#if DEBUG
 
+// MARK: Mocks
 extension User {
     static func randomMock() -> User {
         let firstNames = ["John", "Jane", "Mike", "Sarah", "David", "Emma", "Tom", "Lucy"]
@@ -49,4 +42,15 @@ extension User {
         )
         return user
     }
+
+    static func randomMocks(num: Int) -> [User] {
+        var result: [User] = []
+        for _ in 0..<num {
+            let user = User.randomMock()
+            result.append(user)
+        }
+        return result
+    }
+
 }
+#endif

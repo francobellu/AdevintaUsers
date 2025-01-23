@@ -1,109 +1,104 @@
 import Testing
 @testable import AdevintaUsers
 
+@MainActor
 @Suite("UserListViewModel Tests")
 struct UserListViewModelTests {
-    // Test constants
-    static let mockUsers = [
-        User.randomMock(),
-        User.randomMock()
-    ]
+    let sut: UserListViewModel
+    var fetchUsersUseCase: MockFetchUsersUseCase!
+    var resultUsersStub: Result<[User], UserListViewModelError>
+
+    let usersStubCount = 10
+    let userStub: User = User.randomMock()
+
+    init ()  {
+        resultUsersStub = .success(User.randomMocks(num: usersStubCount))
+        fetchUsersUseCase = MockFetchUsersUseCase()
+        fetchUsersUseCase.usersResultStub = resultUsersStub
+        sut = UserListViewModel(fetchUsersUseCase: fetchUsersUseCase)
+    }
 
     // MARK: INIT
 
-    @Test("test init: constant string properties have expected values")
+    @Test("test init(): test constant string properties are properly initialized")
     func test_constantStrings_haveExpectedValues() async throws {
         // Given
-        let sut = await UserListViewModel(users: [])
 
         // Then
-        try await #require(sut.deleteStr == "Delete")
-        try await #require(sut.titleStr == "Adevinta Users")
-        try await #require(sut.searchBarStr == "Search users")
-        try await #require(sut.errorAlertStr == "Error")
+        #expect(sut.deleteStr == "Delete")
+        #expect(sut.titleStr == "Adevinta Users")
+        #expect(sut.searchBarStr == "Search users")
+        #expect(sut.errorAlertStr == "Error")
     }
 
-    @Test("test init: default properties have default values")
+    @Test("test init(): test default properties are initialized with default values")
     func test_init_defaultPropertiesHaveDefaultValues() async throws {
         // Given / When
-        let sut = await UserListViewModel(users: [])
 
         // Then
-        try await #require(sut.isLoading == false)
-        try await #require(sut.error == nil)
-        try await #require(sut.searchTerm.isEmpty)
+        #expect(sut.searchTerm.isEmpty)
     }
 
-    @Test("test_init_setsInitialUsers")
-    func test_init_setsInitialUsers() async throws {
+    @Test("test init(): test sut is initialized with nil asyncOp")
+    func test_init_asyncOpIsNil() async throws {
         // Given / When
-        let sut = await UserListViewModel(users: Self.mockUsers)
 
         // Then
-        try await #require(sut.users.count == 2)
-        try await #require(sut.users[0].id.value == Self.mockUsers[0].id.value)
-        try await #require(sut.users[1].id.value == Self.mockUsers[1].id.value)
-    }
-
-    @Test("test_init_withRandomMockUsers")
-    func test_init_withRandomMockUsers() async throws {
-        // Given / When
-        let mockUsers = usersMocks(num: 50)
-        let sut = await UserListViewModel(users: mockUsers)
-
-        // Then
-        try await #require(sut.users.count == 50) // usersMocks() creates 50 users
-        try await #require(!sut.users.isEmpty)
-
-        // Verify each user has valid data
-        for user in await sut.users {
-            try #require(!user.email.isEmpty)
-            try #require(!user.id.value.isEmpty)
-            try #require(!user.name.first.isEmpty)
-            try #require(!user.name.last.isEmpty)
-            try #require(!user.phone.isEmpty)
-            try #require(!user.picture.large.isEmpty)
-        }
+        #expect(sut.asyncOp == nil, "sut should be initialized with empty asyncOp")
     }
 
     // MARK: loadUsers
+    @Test("test loadUsers(): test asyncOp is inProgress")
+    func test_loadUsers_asyncOpIsInProgress() async throws {
+        // Given / When
+        Task {
+            await sut.loadUsers()
+        }
 
-    @Test("test_loadUsers_setsIsLoadingToTrue")
-    func test_loadUsers_setsIsLoadingToTrue() async throws {
+        // Then
+        Task {
+            #expect(sut.asyncOp == .inProgress)
+        }
+    }
+
+    @Test("test loadUsers(): test asyncOp is .success and contains users")
+    func test_loadUsers_asyncOpIsSuccessWithUsers() async throws {
+        // Given / When
+        await sut.loadUsers()
+
+        // Then
+        guard case let .success(result: users) = sut.asyncOp,
+              let users else {
+            #expect(Bool(false), "the asyncOp should be .success"); return
+        }
+        
+        try #require(users != nil,"the returned users should not be nil")
+        #expect(!users.isEmpty,"the returned users should not be empty")
+
+        // Verify each user has valid data
+        for i in 0 ..< usersStubCount {
+            guard case let .success(resultUsers) = resultUsersStub else {
+                #expect(Bool(false), "the asyncOp should be .success"); return
+            }
+            #expect(users[i] == resultUsers[i])
+        }
+    }
+
+    @Test("test loadUsers(): test asyncOp is .failed")
+    mutating func test_loadUsers_asyncOpIsFailed() async throws {
         // Given
-        let sut = await UserListViewModel(users: [])
+        fetchUsersUseCase.usersResultStub = .failure(UserListViewModelError.failedToLoad)
 
         // When
         await sut.loadUsers()
 
         // Then
-        try await #require(sut.isLoading == true)
-    }
+        guard case let .failed(error) = sut.asyncOp else {
+            #expect(Bool(false), "the asyncOp should be .failed"); return
+        }
 
-    @Test("test_loadUsers_whenCalled_printsLoadUsersMessage")
-    func test_loadUsers_whenCalled_printsLoadUsersMessage() async throws {
-        // Given
-        let sut = await UserListViewModel(users: [])
-
-        // When
-        await sut.loadUsers()
-
-        // Then
-        // TODO:
-    }
-
-    // MARK: deleteUser
-
-    @Test("test_deleteUser_whenCalled_printsDeleteUserMessage")
-    func test_deleteUser_whenCalled_printsDeleteUserMessage() async throws {
-        // Given
-        let sut = await UserListViewModel(users: Self.mockUsers)
-        let userToDelete = Self.mockUsers[0]
-
-        // When
-        await sut.deleteUser(userToDelete)
-
-        // Then
-        // TODO:
+        guard case UserListViewModelError.failedToLoad = error else {
+            #expect(Bool(false), "the error should be .failedToLoad"); return
+        }
     }
 }

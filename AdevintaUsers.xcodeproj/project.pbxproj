@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdevintaUsersTests.xctestplan; sourceTree = "<group>"; };
 		C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdevintaUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +76,7 @@
 		C7D7B8872D41A6E700AC4E79 = {
 			isa = PBXGroup;
 			children = (
+				C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */,
 				C7D7B8922D41A6E700AC4E79 /* AdevintaUsers */,
 				C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */,
 				C7D7B8AD2D41A6E900AC4E79 /* AdevintaUsersUITests */,

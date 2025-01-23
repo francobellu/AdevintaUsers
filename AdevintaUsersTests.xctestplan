@@ -1,0 +1,49 @@
+{
+  "configurations" : [
+    {
+      "id" : "87506619-467D-43C9-A344-53CFAE95668D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+      {
+        "argument" : ""
+      }
+    ],
+    "environmentVariableEntries" : [
+      {
+        "key" : "OS_ACTIVITY_MODE",
+        "value" : "disable"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:AdevintaUsers.xcodeproj",
+      "identifier" : "C7D7B88F2D41A6E700AC4E79",
+      "name" : "AdevintaUsers"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:AdevintaUsers.xcodeproj",
+        "identifier" : "C7D7B89F2D41A6E900AC4E79",
+        "name" : "AdevintaUsersTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:AdevintaUsers.xcodeproj",
+        "identifier" : "C7D7B8A92D41A6E900AC4E79",
+        "name" : "AdevintaUsersUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
