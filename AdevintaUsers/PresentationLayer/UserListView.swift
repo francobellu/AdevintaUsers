@@ -2,7 +2,6 @@ import SwiftUI
 
 struct UserListView: View {
     @StateObject var viewModel: UserListViewModel // TODO: 1 use Observed Object
-    @State private var selectedUser: User?
 
     var body: some View {
         NavigationView {
@@ -24,11 +23,11 @@ struct UserListView: View {
                 }
             }
             else {
-                Text("Empty")
-                    .task {
-                        await viewModel.loadUsers()
-                    }
+                Text("No Users")
             }
+        }
+        .task {
+            await viewModel.loadUsers()
         }
     }
 }
@@ -52,7 +51,7 @@ extension UserListView {
                 ForEach(users) { user in
                     UserRowView(user: user)
                         .onTapGesture {
-                            selectedUser = user
+                            viewModel.selectedUser = user
                         }
                         .swipeActions {
                             Button(role: .destructive) {
@@ -67,21 +66,38 @@ extension UserListView {
             }
             .searchable(text: $viewModel.searchTerm, prompt: viewModel.searchBarStr)
             .navigationTitle(viewModel.titleStr)
-            .sheet(item: $selectedUser) { user in
+            .sheet(item: $viewModel.selectedUser) { user in
                 UserDetailView(user: user)
             }
         } else {
-            Text("Empty")
+            Text("No Users")
         }
     }
 }
 
-#Preview("Empty State") {
-    let users = [User]()
+#Preview("Empty users") {
+    let users: [User] = []
     let usersResult =  Result<[User], UserListViewModelError> .success(users)
     UserListView(viewModel: .previewMock(usersResult: usersResult))
 }
 
 #Preview("With Users") {
     UserListView(viewModel: .previewMock())
+}
+
+#Preview("In Progress") {
+    let usersResult: Result<[User], UserListViewModelError> = .success([])
+    let viewModel: UserListViewModel = .previewMock(
+        usersResult: usersResult,
+        isLongOperation: true
+    )
+    UserListView(viewModel: viewModel)
+}
+
+#Preview("Error view") {
+    let usersResult: Result<[User], UserListViewModelError> = .failure(UserListViewModelError.loadingFailure)
+    let viewModel: UserListViewModel = .previewMock(
+        usersResult: usersResult
+    )
+    UserListView(viewModel: viewModel)
 }

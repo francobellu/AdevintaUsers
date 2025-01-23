@@ -14,12 +14,17 @@ protocol FetchUsersUseCaseProtocol {
 
 class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
     var usersResultStub: Result <[User], UserListViewModelError>!
+    var isLongOperation: Bool
 
-    init() {
+    init(isLongOperation: Bool = false) {
+        self.isLongOperation = isLongOperation
     }
 
     func execute(page: Int, count: Int) async throws -> [User] {
-        try usersResultStub.get()
+        if isLongOperation {
+            try await Task.sleep(for: .seconds(100))
+        }
+        return try usersResultStub.get()
     }
 }
 
