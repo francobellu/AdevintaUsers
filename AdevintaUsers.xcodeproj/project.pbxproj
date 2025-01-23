@@ -35,14 +35,14 @@
 			path = AdevintaUsers;
 			sourceTree = "<group>";
 		};
-		C7D7B8A32D41A6E900AC4E79 /* AdevintaUsersTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AdevintaUsersTests;
-			sourceTree = "<group>";
-		};
 		C7D7B8AD2D41A6E900AC4E79 /* AdevintaUsersUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AdevintaUsersUITests;
+			sourceTree = "<group>";
+		};
+		C7D7B9162D424E4A00AC4E79 /* PresentationLayer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PresentationLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,7 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D7B8922D41A6E700AC4E79 /* AdevintaUsers */,
-				C7D7B8A32D41A6E900AC4E79 /* AdevintaUsersTests */,
+				C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */,
 				C7D7B8AD2D41A6E900AC4E79 /* AdevintaUsersUITests */,
 				C7D7B8912D41A6E700AC4E79 /* Products */,
 			);
@@ -90,6 +90,14 @@
 				C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
+			);
+			path = AdevintaUsersTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +139,7 @@
 				C7D7B8A22D41A6E900AC4E79 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				C7D7B8A32D41A6E900AC4E79 /* AdevintaUsersTests */,
+				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
 			);
 			name = AdevintaUsersTests;
 			packageProductDependencies = (

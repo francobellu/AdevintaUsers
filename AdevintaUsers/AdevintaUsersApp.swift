@@ -13,7 +13,7 @@ struct AdevintaUsersApp: App {
     // TODO: 1 use DIContainer
     var body: some Scene {
         WindowGroup {
-            let users = usersMocks()
+            let users = usersMocks(num: 50)
             let viewModel = UserListViewModel(users: users)
             UserListView(viewModel: viewModel)
         }

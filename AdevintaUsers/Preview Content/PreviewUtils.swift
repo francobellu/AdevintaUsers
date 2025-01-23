@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-func usersMocks() -> [User] {
+func usersMocks(num: Int) -> [User] {
     var result: [User] = []
-    for _ in 0..<50 {
+    for _ in 0..<num {
         let user = User.randomMock()
         result.append(user)
     }

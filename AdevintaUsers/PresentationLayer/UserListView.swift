@@ -53,7 +53,7 @@ struct UserListView: View {
 }
 
 #Preview("With Users") {
-    let users = usersMocks()
+    let users = usersMocks(num: 50)
     let viewModel = UserListViewModel(users: users)
     UserListView(viewModel: viewModel)
 }

@@ -14,15 +14,16 @@ class UserListViewModel: ObservableObject {
     let titleStr = "Adevinta Users"
     let searchBarStr = "Search users"
     let errorAlertStr = "Error"
+    
     init(users: [User]) {
         self.users = users
     }
 
     func loadUsers() {
-        print("loadMoreUsersIfNeeded")
+        print("loadUsers")
     }
 
-    func deleteUser(_ user: User) async {
+    func deleteUser(_ fuser: User) async {
         print("deleteUser")
     }
 }
