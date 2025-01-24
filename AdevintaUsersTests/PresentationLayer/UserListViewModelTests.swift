@@ -14,6 +14,7 @@ struct UserListViewModelTests {
     let userStub: User = User.randomMock()
 
     init ()  {
+        // Setup mock useCases
         resultUsersStub = .success(User.randomMocks(num: usersStubCount))
         fetchUsersUseCase = MockFetchUsersUseCase()
         fetchUsersUseCase.usersResultStub = resultUsersStub
