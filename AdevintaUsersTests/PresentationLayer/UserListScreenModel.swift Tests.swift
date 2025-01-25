@@ -2,13 +2,13 @@ import Testing
 @testable import AdevintaUsers
 
 @MainActor
-@Suite("UserListViewModel Tests")
-struct UserListViewModelTests {
-    let sut: UserListViewModel
+@Suite("UserListScreenModel Tests")
+struct UserListScreenModelTests {
+    let sut: UserListScreenModel
     var fetchUsersUseCase: MockFetchUsersUseCase!
     var deleteUserUseCase: MockDeleteUserUseCase!
 
-    var resultUsersStub: Result<[User], UserListViewModelError>
+    var resultUsersStub: Result<[User], UserListScreenModelError>
 
     let usersStubCount = 10
     let userStub: User = User.randomMock()
@@ -21,7 +21,7 @@ struct UserListViewModelTests {
 
         deleteUserUseCase = MockDeleteUserUseCase()
 
-        sut = UserListViewModel(
+        sut = UserListScreenModel(
             fetchUsersUseCase: fetchUsersUseCase,
             deleteUserUseCase: deleteUserUseCase
         )
@@ -97,7 +97,7 @@ struct UserListViewModelTests {
     @Test("test loadUsers(): test asyncOp is .loadingFailure")
     mutating func test_loadUsers_asyncOpIsLoadingFailure() async throws {
         // Given
-        fetchUsersUseCase.usersResultStub = .failure(UserListViewModelError.loadingFailure)
+        fetchUsersUseCase.usersResultStub = .failure(UserListScreenModelError.loadingFailure)
 
         // When
         await sut.loadUsers()
@@ -107,7 +107,7 @@ struct UserListViewModelTests {
             #expect(Bool(false), "the asyncOp should be .loadingFailure"); return
         }
 
-        guard case UserListViewModelError.loadingFailure = error else {
+        guard case UserListScreenModelError.loadingFailure = error else {
             #expect(Bool(false), "the error should be .loadingFailure"); return
         }
     }
@@ -138,7 +138,7 @@ struct UserListViewModelTests {
         #expect(users.count == usersStubCount - 1, "the user should be deleted")
     }
 
-    @Test("test deleteUser(): test UserListViewModelError.deletionFailed error")
+    @Test("test deleteUser(): test UserListScreenModelError.deletionFailed error")
     mutating func test_deleteUser_failsWithDeletionFailed () async throws {
         // Given
         await sut.loadUsers()
@@ -161,7 +161,7 @@ struct UserListViewModelTests {
         }
 
         // Then
-        #expect(error as! UserListViewModelError == UserListViewModelError.deletionFailed, "the error should be UserListViewModelError.deletionFailed")
+        #expect(error as! UserListScreenModelError == UserListScreenModelError.deletionFailed, "the error should be UserListScreenModelError.deletionFailed")
         #expect(users.count == usersStubCount, "the user should be deleted")
     }
 }

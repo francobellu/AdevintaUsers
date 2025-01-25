@@ -2,9 +2,9 @@ import Testing
 @testable import AdevintaUsers
 
 @MainActor
-@Suite("UserListViewModel Search Tests")
-struct UserListViewModelSearchTests {
-    let sut: UserListViewModel
+@Suite("UserListScreenModel Search Tests")
+struct UserListScreenModelSearchTests {
+    let sut: UserListScreenModel
     var fetchUsersUseCase: MockFetchUsersUseCase!
     var deleteUserUseCase: MockDeleteUserUseCase!
     var mockUsers: [User]!
@@ -18,7 +18,7 @@ struct UserListViewModelSearchTests {
         fetchUsersUseCase.usersResultStub = .success(mockUsers)
         deleteUserUseCase = MockDeleteUserUseCase()
 
-        sut = UserListViewModel(
+        sut = UserListScreenModel(
             fetchUsersUseCase: fetchUsersUseCase,
             deleteUserUseCase: deleteUserUseCase
         )

@@ -13,7 +13,7 @@ protocol FetchUsersUseCaseProtocol {
 }
 
 class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
-    var usersResultStub: Result <[User], UserListViewModelError>!
+    var usersResultStub: Result <[User], UserListScreenModelError>!
     var isLongOperation: Bool
 
     init(isLongOperation: Bool = false) {

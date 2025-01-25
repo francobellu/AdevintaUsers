@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct UserDetailView: View {
+struct UserDetailScreen: View {
     let user: User
     var body: some View {
         if let url = URL(string: user.picture.large) {
@@ -38,7 +38,8 @@ struct UserDetailView: View {
         }
     }
 }
+
 #Preview {
     let user = User.randomMock()
-    UserDetailView(user: user)
+    UserDetailScreen(user: user)
 }

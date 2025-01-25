@@ -1,13 +1,13 @@
 import Foundation
 import Combine
 
-enum UserListViewModelError: Error {
+enum UserListScreenModelError: Error {
     case loadingFailure
     case deletionFailed
 }
 
 @MainActor
-class UserListViewModel: ObservableObject {
+class UserListScreenModel: ObservableObject {
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var searchTerm = ""
     @Published var selectedUser: User?
@@ -44,7 +44,7 @@ class UserListViewModel: ObservableObject {
             }
         }
         catch {
-            asyncOp = .failed(UserListViewModelError.loadingFailure)
+            asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
     }
 
@@ -58,7 +58,7 @@ class UserListViewModel: ObservableObject {
             asyncOp = .success(result: users)
         }
         catch {
-            asyncOp = .failed(UserListViewModelError.deletionFailed)
+            asyncOp = .failed(UserListScreenModelError.deletionFailed)
         }
     }
 
@@ -81,16 +81,16 @@ class UserListViewModel: ObservableObject {
     }
 }
 
-extension UserListViewModel {
+extension UserListScreenModel {
     static func previewMock(
-        usersResult: Result<[User], UserListViewModelError> = .success(User.randomMocks(num: 20)),
+        usersResult: Result<[User], UserListScreenModelError> = .success(User.randomMocks(num: 20)),
         isLongOperation: Bool = false
-    ) -> UserListViewModel {
+    ) -> UserListScreenModel {
         let mockFetchUsersUseCase = MockFetchUsersUseCase(isLongOperation: isLongOperation)
         mockFetchUsersUseCase.usersResultStub = usersResult
 
         let mockDeleteUserUseCase = MockDeleteUserUseCase()
-        return UserListViewModel(
+        return UserListScreenModel(
             fetchUsersUseCase: mockFetchUsersUseCase,
             deleteUserUseCase: mockDeleteUserUseCase
         )

@@ -26,11 +26,11 @@ struct AdevintaUsersApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let viewModel = UserListViewModel(
+            let viewModel = UserListScreenModel(
                 fetchUsersUseCase: fetchUsersUseCase,
                 deleteUserUseCase: deleteUserUseCase
             )
-            UserListView(viewModel: viewModel)
+            UserListScreen(viewModel: viewModel)
         }
     }
 }
