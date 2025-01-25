@@ -9,6 +9,7 @@ enum UserListScreenModelError: Error {
 @MainActor
 class UserListScreenModel: ObservableObject {
     @Published var asyncOp: AsyncOperation<[User]>?
+    @Published var users: [User] = []
     @Published var searchTerm = ""
     @Published var selectedUser: User?
     @Published var isAllSearch = true
@@ -37,34 +38,18 @@ class UserListScreenModel: ObservableObject {
     func loadUsers() async {
         hasMorePages = true
         do {
-            let existingUsers: [User]
-            if case let .success(users) = asyncOp, let users {
-                // there are existing users
-                existingUsers = users
-            } else {
-                // first load
-                existingUsers = []
-            }
             asyncOp = .inProgress
             let newUsers = try await fetchUsersUseCase.execute(count: usersPerPage)
-
-            let allUsers = existingUsers + newUsers
+            users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
-
-            asyncOp = .success(result: allUsers)
         } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
     }
 
     func deleteUser(_ user: User) async {
-        guard case let .success(result: users) = asyncOp,
-              let users
-        else { return }
-
         do  {
-            let users = try await deleteUserUseCase.execute(user, users: users)
-            asyncOp = .success(result: users)
+            users = try await deleteUserUseCase.execute(user, users: users)
         }
         catch {
             asyncOp = .failed(UserListScreenModelError.deletionFailed)
@@ -72,13 +57,12 @@ class UserListScreenModel: ObservableObject {
     }
 
 
-    var filteredUsers: [User]? {
-        guard case let .success(users) = asyncOp else { return nil }
+    var filteredUsers: [User] {
         guard !searchTerm.isEmpty else { return users }
 
         let searchTerms = searchTerm.split(separator: " ").map(String.init)
 
-        return users?.filter { user in
+        return users.filter { user in
             let matches = { (term: String) -> Bool in
                 user.name.first.localizedCaseInsensitiveContains(term) ||
                 user.name.last.localizedCaseInsensitiveContains(term) ||

@@ -34,12 +34,8 @@ struct UserListScreenModelSearchTests {
         sut.searchTerm = ""
 
         // Then
-        guard case let .success(users) = sut.asyncOp else {
-            try #require(Bool(false), "asyncOp need to be .success in order to contain users to filter")
-            return
-        }
-        #expect(sut.filteredUsers?.count == usersStubCount)
-        #expect(sut.filteredUsers == users)
+        #expect(sut.filteredUsers.count == usersStubCount)
+        #expect(sut.filteredUsers == sut.users)
     }
 
     @MainActor
@@ -53,11 +49,7 @@ struct UserListScreenModelSearchTests {
         sut.searchTerm = targetUser.name.first
 
         // Then
-        guard let filteredUsers = sut.filteredUsers else {
-            try #require(Bool(false), "filteredUsers should not be nil")
-            return
-        }
-        #expect(filteredUsers.contains { $0.id == targetUser.id })
+        #expect(sut.filteredUsers.contains { $0.id == targetUser.id })
     }
 
     @MainActor
@@ -71,11 +63,7 @@ struct UserListScreenModelSearchTests {
         sut.searchTerm = targetUser.name.last
 
         // Then
-        guard let filteredUsers = sut.filteredUsers else {
-            try #require(Bool(false), "filteredUsers should not be nil")
-            return
-        }
-        #expect(filteredUsers.contains { $0.id == targetUser.id })
+        #expect(sut.filteredUsers.contains { $0.id == targetUser.id })
     }
 
     @MainActor
@@ -89,11 +77,7 @@ struct UserListScreenModelSearchTests {
         sut.searchTerm = targetUser.email.prefix(5).lowercased()
 
         // Then
-        guard let filteredUsers = sut.filteredUsers else {
-            try #require(Bool(false), "filteredUsers should not be nil")
-            return
-        }
-        #expect(filteredUsers.contains { $0.id == targetUser.id })
+        #expect(sut.filteredUsers.contains { $0.id == targetUser.id })
     }
 
     @MainActor
@@ -106,10 +90,6 @@ struct UserListScreenModelSearchTests {
         sut.searchTerm = "NonexistentUserXYZ123"
 
         // Then
-        guard let filteredUsers = sut.filteredUsers else {
-            try #require(Bool(false), "filteredUsers should not be nil")
-            return
-        }
-        #expect(filteredUsers.isEmpty)
+        #expect(sut.filteredUsers.isEmpty)
     }
 }

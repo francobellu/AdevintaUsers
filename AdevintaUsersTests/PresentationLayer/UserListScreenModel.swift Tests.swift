@@ -77,20 +77,15 @@ struct UserListScreenModelTests {
         await sut.loadUsers()
 
         // Then
-        guard case let .success(result: users) = sut.asyncOp,
-              let users else {
-            #expect(Bool(false), "the asyncOp should be .success"); return
-        }
-        
-        try #require(users != nil,"the returned users should not be nil")
-        #expect(!users.isEmpty,"the returned users should not be empty")
+        try #require(sut.users != nil,"the returned users should not be nil")
+        #expect(!sut.users.isEmpty,"the returned users should not be empty")
 
         // Verify each user has valid data
         for i in 0 ..< usersStubCount {
             guard case let .success(resultUsers) = resultUsersStub else {
                 #expect(Bool(false), "the asyncOp should be .success"); return
             }
-            #expect(users[i] == resultUsers[i])
+            #expect(sut.users[i] == resultUsers[i])
         }
     }
 
@@ -118,38 +113,25 @@ struct UserListScreenModelTests {
     func test_deleteUser_deleteUser() async throws {
         // Given
         await sut.loadUsers()
-        guard case let .success(result: users) = sut.asyncOp,
-              let users else {
-                try #require(Bool(false), "the asyncOp should be .success"); return
-        }
 
-        try #require(users.count == usersStubCount, "the returned users should have \(usersStubCount) elements")
+        try #require(sut.users.count == usersStubCount, "the returned users should have \(usersStubCount) elements")
 
         // When
-        let userToDelete = users.first!
+        let userToDelete = sut.users.first!
         await sut.deleteUser(userToDelete)
 
-        guard case let .success(result: users) = sut.asyncOp,
-              let users else {
-            #expect(Bool(false), "the asyncOp should be .success"); return
-        }
-
         // Then
-        #expect(users.count == usersStubCount - 1, "the user should be deleted")
+        #expect(sut.users.count == usersStubCount - 1, "the user should be deleted")
     }
 
     @Test("test deleteUser(): test UserListScreenModelError.deletionFailed error")
     mutating func test_deleteUser_failsWithDeletionFailed () async throws {
         // Given
         await sut.loadUsers()
-        guard case let .success(result: users) = sut.asyncOp,
-              let users else {
-                try #require(Bool(false), "the asyncOp should be .success"); return
-        }
 
-        try #require(users.count == usersStubCount, "the returned users should have \(usersStubCount) elements")
+        try #require(sut.users.count == usersStubCount, "the returned users should have \(usersStubCount) elements")
 
-        let userToDelete = users.first!
+        let userToDelete = sut.users.first!
         deleteUserUseCase.errorStub = .internal
 
 
@@ -162,6 +144,6 @@ struct UserListScreenModelTests {
 
         // Then
         #expect(error as! UserListScreenModelError == UserListScreenModelError.deletionFailed, "the error should be UserListScreenModelError.deletionFailed")
-        #expect(users.count == usersStubCount, "the user should be deleted")
+        #expect(sut.users.count == usersStubCount, "the user should be deleted")
     }
 }
