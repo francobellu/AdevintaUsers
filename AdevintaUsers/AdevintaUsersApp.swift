@@ -15,7 +15,7 @@ struct AdevintaUsersApp: App {
     // TODO: use real use cases
     let fetchUsersUseCase: MockFetchUsersUseCase = {
         let fetchUsersUseCase = MockFetchUsersUseCase()
-        fetchUsersUseCase.usersResultStub = .success(User.randomMocks(num: 20))
+        fetchUsersUseCase.usersResultFactory = { .success(User.randomMocks(num: 7)) }
         return fetchUsersUseCase
     }()
 

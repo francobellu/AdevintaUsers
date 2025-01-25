@@ -9,22 +9,29 @@
 import Foundation
 
 protocol FetchUsersUseCaseProtocol {
-    func execute(page: Int, count: Int) async throws -> [User]
+    func execute(count: Int) async throws -> [User]
 }
 
 class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
     var usersResultStub: Result <[User], UserListScreenModelError>!
+    var usersResultFactory: (() -> Result <[User], UserListScreenModelError>)!
     var isLongOperation: Bool
 
     init(isLongOperation: Bool = false) {
         self.isLongOperation = isLongOperation
     }
 
-    func execute(page: Int, count: Int) async throws -> [User] {
+    func execute(count: Int) async throws -> [User] {
+        let result: [User]
         if isLongOperation {
             try await Task.sleep(for: .seconds(100))
         }
-        return try usersResultStub.get()
+        if let usersResultFactory {
+            result = try usersResultFactory().get()
+        } else {
+            result = try usersResultStub.get()
+        }
+        return result
     }
 }
 

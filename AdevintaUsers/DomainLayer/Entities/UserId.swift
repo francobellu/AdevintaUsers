@@ -12,7 +12,7 @@ struct UserId{
     let value: String
 }
 
-extension UserId: Identifiable, Hashable {
+extension UserId: Identifiable, Equatable, Hashable {
     var id: Int {
         (name + value).hashValue
     }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HelperToolbarView: View {
+struct ToolbarView: View {
     let usersCount: Int
     let isTyping: Bool
     @Binding var isAllSearch: Bool
@@ -27,9 +27,9 @@ struct HelperToolbarView: View {
 }
 
 #Preview("Typing") {
-    HelperToolbarView(usersCount: 10, isTyping: true, isAllSearch: .constant(false))
+    ToolbarView(usersCount: 10, isTyping: true, isAllSearch: .constant(false))
 }
 
 #Preview("Not Typing") {
-    HelperToolbarView(usersCount: 10, isTyping: false, isAllSearch: .constant(true))
+    ToolbarView(usersCount: 10, isTyping: false, isAllSearch: .constant(true))
 }

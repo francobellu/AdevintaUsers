@@ -13,6 +13,9 @@ class UserListScreenModel: ObservableObject {
     @Published var selectedUser: User?
     @Published var isAllSearch = true
 
+    private let usersPerPage = 7
+    var hasMorePages = true
+
     let deleteStr = "Delete"
     let titleStr = "Adevinta Users"
     let searchBarStr = "Search users"
@@ -31,19 +34,25 @@ class UserListScreenModel: ObservableObject {
         self.deleteUserUseCase = deleteUserUseCase
     }
 
-    func loadUsers() async{
+    func loadUsers() async {
+        hasMorePages = true
         do {
-            asyncOp = .inProgress
-            let users = try await fetchUsersUseCase.execute(page: 1, count: 1)
-            // TODO: also need to save them in storage... move to fetch usecase
-            if case let .success(existingUsers) = asyncOp,
-               let existingUsers {
-                asyncOp = .success(result: existingUsers + users)
+            let existingUsers: [User]
+            if case let .success(users) = asyncOp, let users {
+                // there are existing users
+                existingUsers = users
             } else {
-                asyncOp = .success(result: users)
+                // first load
+                existingUsers = []
             }
-        }
-        catch {
+            asyncOp = .inProgress
+            let newUsers = try await fetchUsersUseCase.execute(count: usersPerPage)
+
+            let allUsers = existingUsers + newUsers
+            // TODO: also need to save them in storage... move to fetch usecase
+
+            asyncOp = .success(result: allUsers)
+        } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
     }
@@ -66,16 +75,16 @@ class UserListScreenModel: ObservableObject {
     var filteredUsers: [User]? {
         guard case let .success(users) = asyncOp else { return nil }
         guard !searchTerm.isEmpty else { return users }
-        
+
         let searchTerms = searchTerm.split(separator: " ").map(String.init)
-        
+
         return users?.filter { user in
             let matches = { (term: String) -> Bool in
                 user.name.first.localizedCaseInsensitiveContains(term) ||
                 user.name.last.localizedCaseInsensitiveContains(term) ||
                 user.email.localizedCaseInsensitiveContains(term)
             }
-            
+
             return isAllSearch ? searchTerms.allSatisfy(matches) : searchTerms.contains(where: matches)
         }
     }
