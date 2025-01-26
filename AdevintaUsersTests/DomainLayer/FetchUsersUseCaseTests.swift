@@ -7,6 +7,7 @@
 
 @testable import AdevintaUsers
 import Testing
+import Foundation
 
 @Suite("FetchUsersUseCaseTests Tests")
 struct FetchUsersUseCaseTests {
@@ -18,8 +19,7 @@ struct FetchUsersUseCaseTests {
 
     // Stubs
     var successResul: Result<[User], UserRepositoryError> = .success( User.randomMocks(num: 10))
-    var networkingErrorResult: Result<[User], UserRepositoryError> = .failure( .networking)
-    var decodingErrorResult: Result<[User], UserRepositoryError> = .failure( .decoding)
+    var networkingErrorResult: Result<[User], UserRepositoryError> = .failure( .networking(NSError(domain: "test", code: 0)))
 
 
     init() {
@@ -45,18 +45,7 @@ struct FetchUsersUseCaseTests {
         mockUserRepository.userStubs = networkingErrorResult
 
         // When/Then
-        await #expect(throws: UserRepositoryError.networking) {
-            try await sut.execute(batchSize: batchSize, page: page)
-        }
-    }
-
-    @Test("Test fetching users throws a decoding error")
-    mutating func test_execute_throwsDecodingError() async throws {
-        // Given
-        mockUserRepository.userStubs = decodingErrorResult
-
-        // When/Then
-        await #expect(throws: UserRepositoryError.decoding) {
+        await #expect(throws: UserRepositoryError.networking(NSError(domain: "test", code: 0))) {
             try await sut.execute(batchSize: batchSize, page: page)
         }
     }

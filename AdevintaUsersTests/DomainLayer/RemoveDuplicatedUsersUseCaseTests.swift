@@ -66,7 +66,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         #expect(users.count == initialUserCount)
     }
 
-    @Test("")
+    @Test("test_execute_userWithDifferentNameIsNoRemoved")
     func test_execute_userWithDifferentNameIsNoRemoved() async throws {
         // Given
         var users: [User] = [userJohnDoe, userJohnDoe_differentName]
@@ -80,8 +80,8 @@ struct RemoveDuplicatedUsersUseCaseTests {
         #expect(users.count == initialUserCount)
     }
 
-    @Test("")
-    func test_execute_oneUserWithDifferentTelephoneIsRemoved() async throws {
+    @Test("test_execute_userWithDifferentTelephoneIsRemoved")
+    func test_execute_userWithDifferentTelephoneIsRemoved() async throws {
         // Given
         var users: [User] = [userJohnDoe, userJohnDoe_differentTel]
         let initialUserCount = users.count

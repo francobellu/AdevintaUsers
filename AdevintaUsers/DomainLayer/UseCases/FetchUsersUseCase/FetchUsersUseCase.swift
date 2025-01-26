@@ -8,7 +8,6 @@
 class FetchUsersUseCase: FetchUsersUseCaseProtocol {
     let userRepository: UserRepositoryProtocol
 
-
     init(userRepository: UserRepositoryProtocol) {
         self.userRepository = userRepository
     }

@@ -10,6 +10,7 @@
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
+		C7E6E17A2D46E0700056AE35 /* UserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserUseCaseTests.swift; sourceTree = "<group>"; };
 		C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDuplicatedUsersUseCaseTests.swift; sourceTree = "<group>"; };
 		C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsersUseCaseTests.swift; sourceTree = "<group>"; };
+		C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -85,8 +87,8 @@
 		C7D7B8872D41A6E700AC4E79 = {
 			isa = PBXGroup;
 			children = (
-				C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */,
 				C7D7B8922D41A6E700AC4E79 /* AdevintaUsers */,
+				C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */,
 				C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */,
 				C7D7B8AD2D41A6E900AC4E79 /* AdevintaUsersUITests */,
 				C7D7B8912D41A6E700AC4E79 /* Products */,
@@ -106,6 +108,7 @@
 		C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7E6E1782D46E0420056AE35 /* DataLayer */,
 				C7E6E1022D468E8C0056AE35 /* DomainLayer */,
 				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
 			);
@@ -120,6 +123,14 @@
 				C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */,
 			);
 			path = DomainLayer;
+			sourceTree = "<group>";
+		};
+		C7E6E1782D46E0420056AE35 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */,
+			);
+			path = DataLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +287,7 @@
 				C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */,
 				C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */,
 				C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */,
+				C7E6E17A2D46E0700056AE35 /* UserRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
