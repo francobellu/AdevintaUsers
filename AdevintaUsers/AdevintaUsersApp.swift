@@ -11,10 +11,8 @@ import SwiftUI
 struct AdevintaUsersApp: App {
 
     // TODO: use DIContainer
-
-    // TODO: use real use cases
     let fetchUsersUseCase: MockFetchUsersUseCase = {
-        let fetchUsersUseCase = MockFetchUsersUseCase()
+        let fetchUsersUseCase = MockFetchUsersUseCase() // TODO: use real one when implemented
         fetchUsersUseCase.usersResultFactory = { .success(User.randomMocks(num: 8)) }
         return fetchUsersUseCase
     }()
@@ -24,11 +22,17 @@ struct AdevintaUsersApp: App {
         return deleteUserUseCase
     }()
 
+    let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCase = {
+        let removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
+        return removeDuplicatedUsersUseCase
+    }()
+
     var body: some Scene {
         WindowGroup {
             let viewModel = UserListScreenModel(
                 fetchUsersUseCase: fetchUsersUseCase,
-                deleteUserUseCase: deleteUserUseCase
+                deleteUserUseCase: deleteUserUseCase,
+                removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase
             )
             UserListScreen(viewModel: viewModel)
         }

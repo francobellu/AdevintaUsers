@@ -8,16 +8,14 @@ enum UserListScreenModelError: Error {
 
 @MainActor
 class UserListScreenModel: ObservableObject {
+    // MARK: - Observed properties
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var users: [User] = []
     @Published var searchTerm = ""
     @Published var selectedUser: User?
     @Published var isAllSearch = true
 
-    var isTyping: Bool { !searchTerm.isEmpty }
-    private let usersPerPage = 7
-    var hasMorePages = true
-
+    // MARK: - Static strings
     let deleteStr = "Delete"
     let titleStr = "Adevinta Users"
     let searchBarStr = "Search users"
@@ -25,15 +23,23 @@ class UserListScreenModel: ObservableObject {
     let toogleSearchAnyStr = "Search ANY"
     let toogleSearchAllStr = "Search ALL"
 
+    var hasMorePages = true
+
+    private let usersPerPage = 7
+
+    // MARK: - Use cases
     private let fetchUsersUseCase: FetchUsersUseCaseProtocol
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
+    private let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
 
     init(
         fetchUsersUseCase: FetchUsersUseCaseProtocol,
-        deleteUserUseCase: DeleteUserUseCaseProtocol
+        deleteUserUseCase: DeleteUserUseCaseProtocol,
+        removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
     ) {
         self.fetchUsersUseCase = fetchUsersUseCase
         self.deleteUserUseCase = deleteUserUseCase
+        self.removeDuplicatedUsersUseCase = removeDuplicatedUsersUseCase
     }
 
     func loadUsers() async {
@@ -43,6 +49,9 @@ class UserListScreenModel: ObservableObject {
             let newUsers = try await fetchUsersUseCase.execute(count: usersPerPage)
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
+
+            // TODO: check if infinite scrolling still works
+            users = try await removeDuplicatedUsersUseCase.execute(users: users)
         } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
@@ -75,18 +84,9 @@ class UserListScreenModel: ObservableObject {
     }
 }
 
+// Computed properties
 extension UserListScreenModel {
-    static func previewMock(
-        usersResult: Result<[User], UserListScreenModelError> = .success(User.randomMocks(num: 20)),
-        isLongOperation: Bool = false
-    ) -> UserListScreenModel {
-        let mockFetchUsersUseCase = MockFetchUsersUseCase(isLongOperation: isLongOperation)
-        mockFetchUsersUseCase.usersResultStub = usersResult
-
-        let mockDeleteUserUseCase = MockDeleteUserUseCase()
-        return UserListScreenModel(
-            fetchUsersUseCase: mockFetchUsersUseCase,
-            deleteUserUseCase: mockDeleteUserUseCase
-        )
+    var isTyping: Bool {
+        !searchTerm.isEmpty
     }
 }

@@ -12,8 +12,13 @@ struct UserId{
     let value: String
 }
 
-extension UserId: Identifiable, Equatable, Hashable {
-    var id: Int {
-        (name + value).hashValue
+extension UserId: Identifiable, Hashable {
+    var id: String {
+        name + "::" + value
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(value)
     }
 }

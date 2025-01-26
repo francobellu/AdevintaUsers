@@ -5,8 +5,9 @@ import Testing
 @Suite("UserListScreenModel Search Tests")
 struct UserListScreenModelSearchTests {
     let sut: UserListScreenModel
-    var fetchUsersUseCase: MockFetchUsersUseCase!
-    var deleteUserUseCase: MockDeleteUserUseCase!
+    var fetchUsersUseCase: MockFetchUsersUseCase
+    var deleteUserUseCase: MockDeleteUserUseCase
+    var removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCase
     var mockUsers: [User]!
 
     let usersStubCount = 3
@@ -17,10 +18,12 @@ struct UserListScreenModelSearchTests {
         mockUsers = User.randomMocks(num: usersStubCount)
         fetchUsersUseCase.usersResultStub = .success(mockUsers)
         deleteUserUseCase = MockDeleteUserUseCase()
+        removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
 
         sut = UserListScreenModel(
             fetchUsersUseCase: fetchUsersUseCase,
-            deleteUserUseCase: deleteUserUseCase
+            deleteUserUseCase: deleteUserUseCase,
+            removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase
         )
     }
 

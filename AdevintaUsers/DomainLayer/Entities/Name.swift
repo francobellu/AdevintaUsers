@@ -5,6 +5,7 @@
 //  Created by Franco Bellu on 22/1/25.
 //
 
+import Foundation
 
 struct Name {
     let first: String
@@ -12,5 +13,10 @@ struct Name {
 }
 
 extension Name: Identifiable, Hashable {
-    var id: String { first + last }
+    var id: String { first + "::" + last }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(first)
+        hasher.combine(last)
+    }
 }

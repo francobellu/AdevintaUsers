@@ -16,7 +16,7 @@ struct DeleteUserUseCaseTests {
         sut = DeleteUserUseCase()
     }
 
-    @Test("test filteredUsers: empty search text returns all users")
+    @Test("test deletion of one user from a list of users reduces its size by one")
     func test_execute() async throws {
         // Given
         let users = User.randomMocks(num: 10)

@@ -21,6 +21,8 @@ struct UserDetailScreen: View {
                         Text("\(user.name.first) \(user.name.last)")
                             .font(.title)
                             .fontWeight(.bold)
+                        Text("ID: \(user.id.value) ")
+                            .font(.caption)
 
                         Link(user.email, destination: URL(string: "mailto:\(user.email)")!)
                             .font(.headline)
