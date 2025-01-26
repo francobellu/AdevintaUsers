@@ -5,7 +5,7 @@ struct UserListSuccessView: View {
 
     var body: some View {
         VStack {
-                ToolbarView(usersCount: viewModel.filteredUsers.count, isTyping: viewModel.searchTerm.isEmpty, isAllSearch: $viewModel.isAllSearch)
+            ToolbarView(usersCount: viewModel.filteredUsers.count, isTyping: viewModel.isTyping, isAllSearch: $viewModel.isAllSearch)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity)
                 List {
@@ -39,7 +39,7 @@ struct UserListSuccessView: View {
                     prompt: viewModel.searchBarStr
                 )
                 .navigationTitle(viewModel.titleStr)
-                .sheet(item: $viewModel.selectedUser) { user in
+                .sheet(item: $viewModel.selectedUser) { user in 
                     UserDetailScreen(user: user)
                 }
         }

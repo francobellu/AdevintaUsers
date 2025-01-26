@@ -19,8 +19,8 @@ struct AdevintaUsersApp: App {
         return fetchUsersUseCase
     }()
 
-    let deleteUserUseCase: MockDeleteUserUseCase = {
-        let deleteUserUseCase = MockDeleteUserUseCase()
+    let deleteUserUseCase: DeleteUserUseCase = {
+        let deleteUserUseCase = DeleteUserUseCase()
         return deleteUserUseCase
     }()
 

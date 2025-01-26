@@ -4,7 +4,7 @@ struct UserListScreen: View {
     @StateObject var viewModel: UserListScreenModel // TODO: 1 use Observed Object
     var body: some View {
         NavigationView {
-            UserListSuccessView(viewModel: viewModel)
+            UserListSuccessView(viewModel: viewModel )
             if let asyncOp = viewModel.asyncOp {
                 switch asyncOp {
                 case .inProgress:

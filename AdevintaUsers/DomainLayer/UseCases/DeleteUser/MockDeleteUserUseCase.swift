@@ -1,18 +1,10 @@
 //
-//  DeleteUserUseCaseProtocol.swift
+//  MockDeleteUserUseCase.swift
 //  AdevintaUsers
 //
-//  Created by Franco Bellu on 23/1/25.
+//  Created by Franco Bellu on 26/1/25.
 //
 
-
-protocol DeleteUserUseCaseProtocol {
-    func execute(_ user: User, users: [User]) async throws -> [User]
-}
-
-enum DeleteUserUseCaseError: Error {
-    case `internal`
-}
 
 class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
     var errorStub: DeleteUserUseCaseError!

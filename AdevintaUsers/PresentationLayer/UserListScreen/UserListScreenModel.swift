@@ -14,6 +14,7 @@ class UserListScreenModel: ObservableObject {
     @Published var selectedUser: User?
     @Published var isAllSearch = true
 
+    var isTyping: Bool { !searchTerm.isEmpty }
     private let usersPerPage = 7
     var hasMorePages = true
 
