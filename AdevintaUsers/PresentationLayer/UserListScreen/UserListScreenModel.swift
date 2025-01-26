@@ -25,12 +25,14 @@ class UserListScreenModel: ObservableObject {
 
     var hasMorePages = true
 
-    private let usersPerPage = 7
-
     // MARK: - Use cases
     private let fetchUsersUseCase: FetchUsersUseCaseProtocol
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
     private let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
+
+    private let usersPerPage = 7
+    private var currentPage = 1
+
 
     init(
         fetchUsersUseCase: FetchUsersUseCaseProtocol,
@@ -46,7 +48,7 @@ class UserListScreenModel: ObservableObject {
         hasMorePages = true
         do {
             asyncOp = .inProgress
-            let newUsers = try await fetchUsersUseCase.execute(count: usersPerPage)
+            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerPage, page: currentPage)
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
 

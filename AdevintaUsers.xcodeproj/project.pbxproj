@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
+		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserUseCaseTests.swift; sourceTree = "<group>"; };
 		C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDuplicatedUsersUseCaseTests.swift; sourceTree = "<group>"; };
+		C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsersUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -113,6 +115,7 @@
 		C7E6E1022D468E8C0056AE35 /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */,
 				C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */,
 				C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */,
 			);
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */,
+				C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */,
 				C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

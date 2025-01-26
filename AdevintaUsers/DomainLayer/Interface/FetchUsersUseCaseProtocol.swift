@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FetchUsersUseCaseProtocol {
-    func execute(count: Int) async throws -> [User]
+    func execute(batchSize: Int, page: Int) async throws -> [User]
 }
 
 
