@@ -23,7 +23,7 @@ struct DeleteUserUseCaseTests {
         let user = users.first!
 
         // When
-        let result = try await sut.execute(user, users: users)
+        let result = sut.execute(user, users: users)
 
         // Them
         #expect(result.count == 9)

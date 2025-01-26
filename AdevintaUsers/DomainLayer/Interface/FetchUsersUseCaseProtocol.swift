@@ -1,0 +1,16 @@
+//
+//  FetchUsersUseCaseProtocol.swift
+//  AdevintaUsers
+//
+//  Created by Franco Bellu on 23/1/25.
+//
+
+
+import Foundation
+
+protocol FetchUsersUseCaseProtocol {
+    func execute(count: Int) async throws -> [User]
+}
+
+
+

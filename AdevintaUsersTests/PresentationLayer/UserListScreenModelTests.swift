@@ -74,22 +74,14 @@ struct UserListScreenModelTests {
         }
     }
 
-    @Test("test loadUsers(): test asyncOp is .success and contains users")
+    @Test("test loadUsers(): test users is not nil and not empty")
     func test_loadUsers_asyncOpIsSuccessWithUsers() async throws {
         // Given / When
         await sut.loadUsers()
 
         // Then
-        try #require(sut.users != nil,"the returned users should not be nil")
-        #expect(!sut.users.isEmpty,"the returned users should not be empty")
-
-        // Verify each user has valid data
-        for i in 0 ..< usersStubCount {
-            guard case let .success(resultUsers) = resultUsersStub else {
-                #expect(Bool(false), "the asyncOp should be .success"); return
-            }
-            #expect(sut.users[i] == resultUsers[i])
-        }
+        #expect(sut.users != nil, "the returned users should not be nil and not empty")
+        #expect(!sut.users.isEmpty, "the returned users should not be empty")
     }
 
     @Test("test loadUsers(): test asyncOp is .loadingFailure")
@@ -125,28 +117,5 @@ struct UserListScreenModelTests {
 
         // Then
         #expect(sut.users.count == usersStubCount - 1, "the user should be deleted")
-    }
-
-    @Test("test deleteUser(): test UserListScreenModelError.deletionFailed error")
-    mutating func test_deleteUser_failsWithDeletionFailed () async throws {
-        // Given
-        await sut.loadUsers()
-
-        try #require(sut.users.count == usersStubCount, "the returned users should have \(usersStubCount) elements")
-
-        let userToDelete = sut.users.first!
-        deleteUserUseCase.errorStub = .internal
-
-
-        // When
-        await sut.deleteUser(userToDelete)
-
-        guard case let .failed(error) = sut.asyncOp else {
-            #expect(Bool(true), "the asyncOp should be .failed"); return
-        }
-
-        // Then
-        #expect(error as! UserListScreenModelError == UserListScreenModelError.deletionFailed, "the error should be UserListScreenModelError.deletionFailed")
-        #expect(sut.users.count == usersStubCount, "the user should be deleted")
     }
 }

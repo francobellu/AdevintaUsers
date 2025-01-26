@@ -1,16 +1,12 @@
 //
-//  FetchUsersUseCaseProtocol.swift
+//  MockFetchUsersUseCase.swift
 //  AdevintaUsers
 //
-//  Created by Franco Bellu on 23/1/25.
+//  Created by Franco Bellu on 26/1/25.
 //
 
 
 import Foundation
-
-protocol FetchUsersUseCaseProtocol {
-    func execute(count: Int) async throws -> [User]
-}
 
 class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
     var usersResultStub: Result <[User], UserListScreenModelError>!
@@ -34,4 +30,3 @@ class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
         return result
     }
 }
-

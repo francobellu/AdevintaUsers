@@ -32,7 +32,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         try #require(users.count == initialUserCount)
 
         // When
-        users = try await sut.execute(users: users)
+        users = sut.execute(users: users)
 
         // Them
         #expect(users.count == initialUserCount - 1)
@@ -46,7 +46,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         try #require(users.count == initialUserCount)
 
         // When
-        users = try await sut.execute(users: users)
+        users = sut.execute(users: users)
 
         // Them
         #expect(users.count == initialUserCount)
@@ -60,7 +60,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         try #require(users.count == initialUserCount)
 
         // When
-        users = try await sut.execute(users: users)
+        users =  sut.execute(users: users)
 
         // Them
         #expect(users.count == initialUserCount)
@@ -74,7 +74,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         try #require(users.count == initialUserCount)
 
         // When
-        users = try await sut.execute(users: users)
+        users = sut.execute(users: users)
 
         // Them
         #expect(users.count == initialUserCount)
@@ -88,7 +88,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
         try #require(users.count == initialUserCount)
 
         // When
-        users = try await sut.execute(users: users)
+        users = sut.execute(users: users)
 
         // Them
         #expect(users.count == initialUserCount - 1)

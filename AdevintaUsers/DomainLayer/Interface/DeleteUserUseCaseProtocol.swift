@@ -6,7 +6,7 @@
 //
 
 protocol DeleteUserUseCaseProtocol {
-    func execute(_ user: User, users: [User]) async throws -> [User]
+    func execute(_ user: User, users: [User]) -> [User]
 }
 
 enum DeleteUserUseCaseError: Error {

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RemoveDuplicatedUsersUseCaseProtocol {
-    func execute(users: [User]) async throws -> [User]
+    func execute(users: [User]) -> [User]
 }

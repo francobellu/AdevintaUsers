@@ -9,16 +9,9 @@
 class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
     var errorStub: DeleteUserUseCaseError!
 
-    init() {
-    }
-
-    func execute(_ user: User, users: [User]) async throws -> [User] {
-        if let errorStub {
-            throw errorStub
-        } else {
+    func execute(_ user: User, users: [User]) -> [User] {
             var result = users
             result.removeAll { $0.id == user.id}
             return result
-        }
     }
 }

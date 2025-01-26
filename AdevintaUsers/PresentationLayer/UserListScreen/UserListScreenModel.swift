@@ -50,20 +50,14 @@ class UserListScreenModel: ObservableObject {
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
 
-            // TODO: check if infinite scrolling still works
-            users = try await removeDuplicatedUsersUseCase.execute(users: users)
+            users = removeDuplicatedUsersUseCase.execute(users: users)
         } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
     }
 
     func deleteUser(_ user: User) async {
-        do  {
-            users = try await deleteUserUseCase.execute(user, users: users)
-        }
-        catch {
-            asyncOp = .failed(UserListScreenModelError.deletionFailed)
-        }
+        users = deleteUserUseCase.execute(user, users: users)
     }
 
 
