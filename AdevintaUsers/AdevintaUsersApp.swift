@@ -9,11 +9,23 @@ import SwiftUI
 
 @main
 struct AdevintaUsersApp: App {
-
     // TODO: use DIContainer
-    let fetchUsersUseCase: MockFetchUsersUseCase = {
-        let fetchUsersUseCase = MockFetchUsersUseCase() // TODO: use real one when implemented
-        fetchUsersUseCase.usersResultFactory = { .success(User.randomMocks(num: 8)) }
+    let fetchUsersUseCase: FetchUsersUseCase = {
+        let jsonDecoder = JSONDecoder()
+        let jsonEncoder = JSONEncoder()
+        let urlSession = URLSession.shared
+        let configuration = HTTPClientConfiguration.default
+        let httpClient = HTTPClient(urlSession: urlSession, configuration: configuration)
+        let apiClientConfiguration = ApiClientConfiguration.default()
+        let apiClient = ApiClient(
+            configuration: apiClientConfiguration,
+            httpClient: httpClient,
+            jsonDecoder: jsonDecoder,
+            jsonEncoder: jsonEncoder
+        )
+        let userRepository = UserRepository(apiClient: apiClient)
+
+        let fetchUsersUseCase = FetchUsersUseCase(userRepository: userRepository)
         return fetchUsersUseCase
     }()
 
