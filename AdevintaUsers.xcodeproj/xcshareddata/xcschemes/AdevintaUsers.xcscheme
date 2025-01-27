@@ -57,6 +57,17 @@
                ReferencedContainer = "container:AdevintaUsers.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C7E6E2942D47C1270056AE35"
+               BuildableName = "AdevintaUsersIntegrationTests.xctest"
+               BlueprintName = "AdevintaUsersIntegrationTests"
+               ReferencedContainer = "container:AdevintaUsers.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

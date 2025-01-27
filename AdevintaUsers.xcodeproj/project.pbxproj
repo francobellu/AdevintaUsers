@@ -11,6 +11,10 @@
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
 		C7E6E17A2D46E0700056AE35 /* UserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */; };
+		C7E6E2AA2D47C6CF0056AE35 /* ApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E2A22D47C6CF0056AE35 /* ApiClientTests.swift */; };
+		C7E6E2AB2D47C6CF0056AE35 /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E2A42D47C6CF0056AE35 /* MockURLSession.swift */; };
+		C7E6E2AC2D47C6CF0056AE35 /* HTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E2A32D47C6CF0056AE35 /* HTTPClientTests.swift */; };
+		C7E6E2AD2D47C6CF0056AE35 /* SupportingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E2A52D47C6CF0056AE35 /* SupportingTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +32,13 @@
 			remoteGlobalIDString = C7D7B88F2D41A6E700AC4E79;
 			remoteInfo = AdevintaUsers;
 		};
+		C7E6E2992D47C1270056AE35 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7D7B8882D41A6E700AC4E79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7D7B88F2D41A6E700AC4E79;
+			remoteInfo = AdevintaUsers;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +50,11 @@
 		C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDuplicatedUsersUseCaseTests.swift; sourceTree = "<group>"; };
 		C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsersUseCaseTests.swift; sourceTree = "<group>"; };
 		C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryTests.swift; sourceTree = "<group>"; };
+		C7E6E2952D47C1270056AE35 /* AdevintaUsersIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7E6E2A22D47C6CF0056AE35 /* ApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientTests.swift; sourceTree = "<group>"; };
+		C7E6E2A32D47C6CF0056AE35 /* HTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientTests.swift; sourceTree = "<group>"; };
+		C7E6E2A42D47C6CF0056AE35 /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		C7E6E2A52D47C6CF0056AE35 /* SupportingTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -55,6 +71,16 @@
 		C7D7B9162D424E4A00AC4E79 /* PresentationLayer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		C7E6E28D2D47BF200056AE35 /* Utils */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C7E6E2962D47C1270056AE35 /* AdevintaUsersIntegrationTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AdevintaUsersIntegrationTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -81,6 +107,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E6E2922D47C1270056AE35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +124,7 @@
 				C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */,
 				C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */,
 				C7D7B8AD2D41A6E900AC4E79 /* AdevintaUsersUITests */,
+				C7E6E2962D47C1270056AE35 /* AdevintaUsersIntegrationTests */,
 				C7D7B8912D41A6E700AC4E79 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +135,7 @@
 				C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */,
 				C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */,
 				C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */,
+				C7E6E2952D47C1270056AE35 /* AdevintaUsersIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +143,8 @@
 		C7D7B9152D424E1500AC4E79 /* AdevintaUsersTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7E6E2A72D47C6CF0056AE35 /* AdaptersTests */,
+				C7E6E28D2D47BF200056AE35 /* Utils */,
 				C7E6E1782D46E0420056AE35 /* DataLayer */,
 				C7E6E1022D468E8C0056AE35 /* DomainLayer */,
 				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
@@ -131,6 +168,25 @@
 				C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */,
 			);
 			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		C7E6E2A62D47C6CF0056AE35 /* RestApiClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7E6E2A22D47C6CF0056AE35 /* ApiClientTests.swift */,
+				C7E6E2A32D47C6CF0056AE35 /* HTTPClientTests.swift */,
+				C7E6E2A42D47C6CF0056AE35 /* MockURLSession.swift */,
+				C7E6E2A52D47C6CF0056AE35 /* SupportingTypes.swift */,
+			);
+			path = RestApiClientTests;
+			sourceTree = "<group>";
+		};
+		C7E6E2A72D47C6CF0056AE35 /* AdaptersTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7E6E2A62D47C6CF0056AE35 /* RestApiClientTests */,
+			);
+			path = AdaptersTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +229,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
+				C7E6E28D2D47BF200056AE35 /* Utils */,
 			);
 			name = AdevintaUsersTests;
 			packageProductDependencies = (
@@ -204,6 +261,29 @@
 			productReference = C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C7E6E2942D47C1270056AE35 /* AdevintaUsersIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7E6E29B2D47C1270056AE35 /* Build configuration list for PBXNativeTarget "AdevintaUsersIntegrationTests" */;
+			buildPhases = (
+				C7E6E2912D47C1270056AE35 /* Sources */,
+				C7E6E2922D47C1270056AE35 /* Frameworks */,
+				C7E6E2932D47C1270056AE35 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7E6E29A2D47C1270056AE35 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C7E6E2962D47C1270056AE35 /* AdevintaUsersIntegrationTests */,
+			);
+			name = AdevintaUsersIntegrationTests;
+			packageProductDependencies = (
+			);
+			productName = AdevintaUsersIntegrationTests;
+			productReference = C7E6E2952D47C1270056AE35 /* AdevintaUsersIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,6 +302,10 @@
 						TestTargetID = C7D7B88F2D41A6E700AC4E79;
 					};
 					C7D7B8A92D41A6E900AC4E79 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = C7D7B88F2D41A6E700AC4E79;
+					};
+					C7E6E2942D47C1270056AE35 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = C7D7B88F2D41A6E700AC4E79;
 					};
@@ -244,6 +328,7 @@
 				C7D7B88F2D41A6E700AC4E79 /* AdevintaUsers */,
 				C7D7B89F2D41A6E900AC4E79 /* AdevintaUsersTests */,
 				C7D7B8A92D41A6E900AC4E79 /* AdevintaUsersUITests */,
+				C7E6E2942D47C1270056AE35 /* AdevintaUsersIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -270,6 +355,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E6E2932D47C1270056AE35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -286,12 +378,23 @@
 			files = (
 				C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */,
 				C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */,
+				C7E6E2AA2D47C6CF0056AE35 /* ApiClientTests.swift in Sources */,
+				C7E6E2AB2D47C6CF0056AE35 /* MockURLSession.swift in Sources */,
+				C7E6E2AC2D47C6CF0056AE35 /* HTTPClientTests.swift in Sources */,
+				C7E6E2AD2D47C6CF0056AE35 /* SupportingTypes.swift in Sources */,
 				C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */,
 				C7E6E17A2D46E0700056AE35 /* UserRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C7D7B8A62D41A6E900AC4E79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7E6E2912D47C1270056AE35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -310,6 +413,11 @@
 			isa = PBXTargetDependency;
 			target = C7D7B88F2D41A6E700AC4E79 /* AdevintaUsers */;
 			targetProxy = C7D7B8AB2D41A6E900AC4E79 /* PBXContainerItemProxy */;
+		};
+		C7E6E29A2D47C1270056AE35 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7D7B88F2D41A6E700AC4E79 /* AdevintaUsers */;
+			targetProxy = C7E6E2992D47C1270056AE35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -565,6 +673,42 @@
 			};
 			name = Release;
 		};
+		C7E6E29C2D47C1270056AE35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3VPL75LCE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = franco.bellu.AdevintaUsersIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdevintaUsers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdevintaUsers";
+			};
+			name = Debug;
+		};
+		C7E6E29D2D47C1270056AE35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3VPL75LCE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = franco.bellu.AdevintaUsersIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdevintaUsers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdevintaUsers";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -600,6 +744,15 @@
 			buildConfigurations = (
 				C7D7B8BB2D41A6E900AC4E79 /* Debug */,
 				C7D7B8BC2D41A6E900AC4E79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7E6E29B2D47C1270056AE35 /* Build configuration list for PBXNativeTarget "AdevintaUsersIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7E6E29C2D47C1270056AE35 /* Debug */,
+				C7E6E29D2D47C1270056AE35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
