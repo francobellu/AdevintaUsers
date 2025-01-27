@@ -32,8 +32,6 @@ class UserListScreenModel: ObservableObject {
 
     private let usersPerPage = 7
     private var currentPage = 1
-
-
     init(
         fetchUsersUseCase: FetchUsersUseCaseProtocol,
         deleteUserUseCase: DeleteUserUseCaseProtocol,
@@ -48,7 +46,7 @@ class UserListScreenModel: ObservableObject {
         hasMorePages = true
         do {
             asyncOp = .inProgress
-            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerPage, page: currentPage)
+            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerPage)
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
 

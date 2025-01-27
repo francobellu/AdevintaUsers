@@ -11,24 +11,18 @@ struct ApiClientTests {
     var jsonEncoder = JSONEncoder()
 
     // MARK: - Test Stubs
-    let stubBaseURLStr = "https://api.example.com"
-    let stubEmptyJSONData = "{}".data(using: .utf8)!
     let stubInvalidJSONData = "{\"invalid\": \"json\"}".data(using: .utf8)!
-    let stubResponseURL = URL(string: "https://example.com")!
-    let stubErrorData = Data() // Empty data for error conditions
 
-    let stubCorruptedData = "Invalid JSON Data".data(using: .utf8)!
+    let stubResponseURL = URL(string: "https://example.com")!
+
     let stubInvalidJSONDataForDecodingErrorTypeMismatch = """
     {
-        "results": [
-            {
-                "id": "912649",
-                "title": "Test Movie",
-                "overview": "Test Overview"
-            }
-        ]
+        "results": ""
     }
     """.data(using: .utf8)!
+
+    let getUsersEndpoint = UsersEndpoint.getUsers(batchSize: 10)
+
 
     // MARK: - Initialization
     init() {
@@ -45,20 +39,10 @@ struct ApiClientTests {
     }
 
     // MARK: - Tests
-    @Test("Get Popular Items")
-    func test_sendRequest_returnsPopularItems() async throws {
+    @Test("Test Get Users")
+    func test_sendRequest_returnsUsers() async throws {
         // Given
-        let jsonData = """
-        {
-            "results": [
-                {
-                    "id": 912649,
-                    "title": "Test Movie",
-                    "overview": "Test Overview"
-                }
-            ]
-        }
-        """.data(using: .utf8)!
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
 
         mockHttpClient.data = jsonData
         mockHttpClient.response = HTTPURLResponse(
@@ -69,18 +53,20 @@ struct ApiClientTests {
         )
 
         // When
-        let result: TestResponse = try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get)
+        let response: UsersResponseDTO = try await sut.sendRequest(endpoint: getUsersEndpoint)
 
         // Then
-        #expect(result.results.count == 1, "Should have 1 result")
-        #expect(result.results[0].id == 912649, "First item ID should be 912649")
-        #expect(result.results[0].title == "Test Movie", "First item title should be 'Test Movie'")
+        #expect(response.results.count == 1, "Should have 1 result")
+        #expect(response.results[0].name.first == "Jennie")
+        #expect(response.results[0].name.last == "Nichols")
     }
 
     @Test("Test Headers")
     func test_sendRequest_setsCorrectHeaders() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
+
         mockHttpClient.response = HTTPURLResponse(
             url: stubResponseURL,
             statusCode: 200,
@@ -89,7 +75,7 @@ struct ApiClientTests {
         )
 
         // When
-        let _: EmptyResponse = try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get)
+        let _: UsersResponseDTO =  try await sut.sendRequest(endpoint: getUsersEndpoint)
 
         // Then
         let request = try #require(mockHttpClient.lastRequest)
@@ -102,7 +88,8 @@ struct ApiClientTests {
     @Test("Test URL Parameters")
     func test_sendRequest_setsCorrectURLParameters() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.response = HTTPURLResponse(
             url: stubResponseURL,
             statusCode: 200,
@@ -111,7 +98,7 @@ struct ApiClientTests {
         )
 
         // When
-        let _: EmptyResponse = try await sut.sendRequest(endpoint: TestEndpoint.details(123), method: .get)
+        let _: UsersResponseDTO =  try await sut.sendRequest(endpoint: getUsersEndpoint)
 
         // Then
         let request = try #require(mockHttpClient.lastRequest)
@@ -119,66 +106,71 @@ struct ApiClientTests {
         let components = try #require(URLComponents(url: url, resolvingAgainstBaseURL: true))
         let queryItems = try #require(components.queryItems)
 
-        #expect(queryItems.contains(where: { $0.name == "language" && $0.value == "en-US" }))
+        #expect(queryItems.contains(where: { $0.name == "results" && $0.value == "10" }))
     }
 
     @Test("Test Not Found Response")
     func test_sendRequest_throwsNotFoundError() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.error = HTTPClientError.clientError(statusCode: 404)
 
         // When/Then
         await #expect(throws: ApiClientError.notFound) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
     @Test("Test Unauthorized Error")
     func test_sendRequest_throwsUnauthorizedError() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.error = HTTPClientError.clientError(statusCode: 401)
 
         // When/Then
         await #expect(throws: ApiClientError.unauthorized) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
     @Test("Test Forbidden Error")
     func test_sendRequest_throwsForbiddenError() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+       let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.error = HTTPClientError.clientError(statusCode: 403)
 
         // When/Then
         await #expect(throws: ApiClientError.forbidden) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
     @Test("Test Client Error")
     func test_sendRequest_throwsClientError() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.error = HTTPClientError.clientError(statusCode: 444)
 
         // When/Then
         await #expect(throws: ApiClientError.clientError(statusCode: 444)) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
     @Test("Test Server Error")
     func test_sendRequest_throwsServerError() async throws {
         // Given
-        mockHttpClient.data = stubEmptyJSONData
+        let jsonData = loadMockData(fromFile: "UsersSuccess")
+        mockHttpClient.data = jsonData
         mockHttpClient.error = HTTPClientError.serverError(statusCode: 500)
 
         // When/Then
         await #expect(throws: ApiClientError.serverError(statusCode: 500)) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -191,7 +183,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.unknownError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -204,7 +196,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.networkError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -217,7 +209,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.networkError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -230,7 +222,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.unknownError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -249,7 +241,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.decodingError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as TestResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -261,7 +253,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.invalidResponse) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as EmptyResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 
@@ -278,7 +270,7 @@ struct ApiClientTests {
 
         // When/Then
         await #expect(throws: ApiClientError.decodingError) {
-            try await sut.sendRequest(endpoint: TestEndpoint.popular, method: .get) as TestResponse
+            try await sut.sendRequest(endpoint: getUsersEndpoint) as UsersResponseDTO
         }
     }
 }

@@ -1,7 +1,7 @@
 import Foundation
 @testable import AdevintaUsers
 import Testing
-@Suite("APICLientIntegrationTests")
+@Suite("ApiClientIntegrationTests")
 struct ApiClientIntegrationTests {
     let sut: ApiClient
     init() {
@@ -22,9 +22,9 @@ struct ApiClientIntegrationTests {
     @Test("test fetchUsers uses correct endpoint")
     func test_sendRequest() async throws {
         // Given
-        let endpoint = UsersEndpoint.getUsers
+        let endpoint = UsersEndpoint.getUsers(batchSize: 10)
         // When
-        let usersResponseDTO: UsersResponseDTO = try await sut.sendRequest(endpoint: endpoint, method: .get)
+        let usersResponseDTO: UsersResponseDTO = try await sut.sendRequest(endpoint: endpoint)
         print ("usersResponseDTO: \(usersResponseDTO)")
         // Then
         #expect(usersResponseDTO.results.count > 0)

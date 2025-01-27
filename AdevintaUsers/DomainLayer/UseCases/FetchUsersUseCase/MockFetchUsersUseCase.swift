@@ -17,7 +17,7 @@ class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
         self.isLongOperation = isLongOperation
     }
 
-    func execute(batchSize: Int, page: Int) async throws -> [User] {
+    func execute(batchSize: Int) async throws -> [User] {
         let result: [User]
         if isLongOperation {
             try await Task.sleep(for: .seconds(100))

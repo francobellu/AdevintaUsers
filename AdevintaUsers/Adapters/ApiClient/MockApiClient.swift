@@ -6,7 +6,7 @@ final class MockApiClient: ApiClientProtocol, @unchecked Sendable {
     private(set) var lastEndpoint: (any EndpointProtocol)?
 
     init() {}
-    func sendRequest<T: Decodable>(endpoint: any EndpointProtocol, method: HTTPMethod) async throws -> T {
+    func sendRequest<T: Decodable>(endpoint: any EndpointProtocol) async throws -> T {
         lastEndpoint = endpoint
 
         if let error = mockError {

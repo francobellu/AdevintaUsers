@@ -35,19 +35,19 @@ final class ApiClient: ApiClientProtocol, Sendable {
         self.jsonEncoder = jsonEncoder
     }
 
-    func sendRequest<T: Decodable>(endpoint: any EndpointProtocol, method: HTTPMethod) async throws -> T {
-        let request = try buildRequest(for: endpoint, method: method)
+    func sendRequest<T: Decodable>(endpoint: any EndpointProtocol) async throws -> T {
+        let request = try buildRequest(for: endpoint)
         dump(request)
         let data = try await performRequest(request)
         return try decodeResponse(data)
     }
 }
 
-extension ApiClient {
-    func buildRequest(for endpoint: any EndpointProtocol, method: HTTPMethod) throws -> URLRequest {
+private extension ApiClient {
+    func buildRequest(for endpoint: any EndpointProtocol) throws -> URLRequest {
         let url = try buildURL(for: endpoint)
         var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
+        request.httpMethod = endpoint.method
 
         // Apply all headers from configuration
         configuration.customHeaders.forEach { key, value in

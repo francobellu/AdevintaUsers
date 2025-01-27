@@ -1,5 +1,5 @@
 import Foundation
 
 protocol UserRepositoryProtocol {
-    func fetchUsers(batchSize: Int, page: Int) async throws -> [User]
+    func fetchUsers(batchSize: Int) async throws -> [User]
 }

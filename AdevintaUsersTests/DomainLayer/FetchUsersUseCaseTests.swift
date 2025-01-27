@@ -33,7 +33,7 @@ struct FetchUsersUseCaseTests {
         mockUserRepository.userStubs = successResul
 
         // When
-        let result = try await sut.execute(batchSize: batchSize, page: page)
+        let result = try await sut.execute(batchSize: batchSize)
 
         // Then
         #expect(!result.isEmpty, "The user array should not be empty")
@@ -46,7 +46,7 @@ struct FetchUsersUseCaseTests {
 
         // When/Then
         await #expect(throws: UserRepositoryError.networking(NSError(domain: "test", code: 0))) {
-            try await sut.execute(batchSize: batchSize, page: page)
+            try await sut.execute(batchSize: batchSize)
         }
     }
 }

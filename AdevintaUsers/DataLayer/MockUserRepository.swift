@@ -10,13 +10,11 @@ import Foundation
 class MockUserRepository: UserRepositoryProtocol {
     var userStubs: Result< [User], UserRepositoryError>!
 
-    func fetchUsers(batchSize: Int, page: Int) async throws -> [User]{
+    func fetchUsers(batchSize: Int) async throws -> [User]{
         try userStubs.get()
     }
-
-    func deleteUser(_ user: User) async throws {
-        // TODO:
-    }
+//    func deleteUser(_ user: User) async throws {
+//    }
 }
 
 
