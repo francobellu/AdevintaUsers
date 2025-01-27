@@ -1,15 +1,20 @@
 import Foundation
 
 class RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
-    func execute(users: [User]) -> [User] {
+    func execute(users: [User]) -> (unique: [User], duplicates: [User]) {
         var seen = Set<User>()
-        return users.filter { user in
+        var duplicates = [User]()
+        let uniqueUsers = users.filter { user in
             if seen.contains(user) {
+                duplicates.append(user)
                 return false
             } else {
                 seen.insert(user)
                 return true
             }
         }
+        print("Unique: ", uniqueUsers)
+        print("\nSeen", seen)
+        return (unique: uniqueUsers, duplicates: duplicates)
     }
 }

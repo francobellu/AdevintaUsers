@@ -3,7 +3,8 @@ import SwiftUI
 struct UserListProgressView: View {
     var body: some View {
         ProgressView()
-            .frame(idealWidth: .infinity, alignment: .center)
+            .scaleEffect(1.5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

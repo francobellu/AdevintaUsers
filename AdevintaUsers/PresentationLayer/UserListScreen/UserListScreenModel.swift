@@ -4,6 +4,15 @@ import Combine
 enum UserListScreenModelError: Error {
     case loadingFailure
     case deletionFailed
+
+    var userMessage: String {
+        switch self {
+        case .loadingFailure:
+            return "Unable to load users. \nPlease check your connection and try again."
+        case .deletionFailed:
+            return "Failed to delete user. \nPlease try again."
+        }
+    }
 }
 
 @MainActor
@@ -11,13 +20,17 @@ final class UserListScreenModel: ObservableObject {
     // MARK: - Observed properties
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var users: [User] = []
+    @Published var duplcatesUsers: [User] = []
+    @Published var blacklistedUsers: [User] = []
     @Published var searchTerm = ""
     @Published var selectedUser: User?
     @Published var isAllSearch = true
+    @Published var showingDuplicates = false
+    @Published var showingBlacklist = false
 
     // MARK: - Static strings
     let deleteStr = "Delete"
-    let titleStr = "Adevinta Users"
+    let titleStr = "Users"
     let searchBarStr = "Search users"
     let errorAlertStr = "Error"
     let toogleSearchAnyStr = "Search ANY"
@@ -51,7 +64,10 @@ final class UserListScreenModel: ObservableObject {
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
 
-            users = removeDuplicatedUsersUseCase.execute(users: users)
+            let (uniqueUsers, duplicates) = removeDuplicatedUsersUseCase.execute(users: users)
+            users = uniqueUsers
+            duplcatesUsers = duplicates
+            asyncOp = nil
         } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
@@ -59,6 +75,7 @@ final class UserListScreenModel: ObservableObject {
 
     func deleteUser(_ user: User) async {
         users = deleteUserUseCase.execute(user, users: users)
+        blacklistedUsers.append(user)
     }
 
 
@@ -75,6 +92,16 @@ final class UserListScreenModel: ObservableObject {
             }
 
             return isAllSearch ? searchTerms.allSatisfy(matches) : searchTerms.contains(where: matches)
+        }
+    }
+
+    var displayedUsers: [User] {
+        if showingDuplicates {
+            return duplcatesUsers
+        } else if showingBlacklist {
+            return blacklistedUsers
+        } else {
+            return filteredUsers
         }
     }
 }

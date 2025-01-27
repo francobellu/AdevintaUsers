@@ -37,7 +37,6 @@ final class ApiClient: ApiClientProtocol, Sendable {
 
     func sendRequest<T: Decodable>(endpoint: any EndpointProtocol) async throws -> T {
         let request = try buildRequest(for: endpoint)
-        dump(request)
         let data = try await performRequest(request)
         return try decodeResponse(data)
     }
@@ -92,6 +91,7 @@ private extension ApiClient {
         do {
             return try await httpClient.sendRequest(request)
         } catch {
+            print (error)
             throw handleRequestError(error)
         }
     }

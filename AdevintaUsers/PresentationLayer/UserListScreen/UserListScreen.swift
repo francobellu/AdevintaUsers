@@ -4,27 +4,30 @@ struct UserListScreen: View {
     @StateObject var viewModel: UserListScreenModel // TODO: 1 use Observed Object
     var body: some View {
         NavigationView {
-            UserListSuccessView(viewModel: viewModel )
-            if let asyncOp = viewModel.asyncOp {
-                switch asyncOp {
-                case .inProgress:
-                    UserListProgressView()
-                case .failed(let error):
-                    UserListFailedView(error: error)
-                        .alert(viewModel.errorAlertStr, isPresented: .constant(viewModel.asyncOp == .failed(error))) {
-                            Button("OK") {
-                                viewModel.asyncOp = nil
-                            }
-                        } message: {
-                            Text(error.localizedDescription)
+            ZStack {
+                UserListSuccessView(viewModel: viewModel)
+                if let asyncOp = viewModel.asyncOp {
+                    switch asyncOp {
+                    case .inProgress:
+                        UserListProgressView()
+                    case .failed(let error ):
+                        if let error = error as? UserListScreenModelError {
+                            ErrorView(
+                                userMessage: error.userMessage,
+                                onRetry: {
+                                    Task{
+                                        await viewModel.loadUsers()
+                                    }
+                                }
+                            )
                         }
+                    }
                 }
             }
-
-        }
-        .padding(.horizontal, 16)
-        .task {
-            await viewModel.loadUsers()
+            .padding(.horizontal, 16)
+            .task {
+                await viewModel.loadUsers()
+            }
         }
     }
 }

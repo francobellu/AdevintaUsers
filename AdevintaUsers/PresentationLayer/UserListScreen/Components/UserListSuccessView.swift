@@ -5,7 +5,15 @@ struct UserListSuccessView: View {
 
     var body: some View {
         VStack {
-            ToolbarView(usersCount: viewModel.filteredUsers.count, isTyping: viewModel.isTyping, isAllSearch: $viewModel.isAllSearch)
+            ToolbarView(
+                usersCount: viewModel.filteredUsers.count,
+                isTyping: viewModel.isTyping,
+                duplicateUsers: viewModel.duplcatesUsers,
+                blacklistedUsers: viewModel.blacklistedUsers,
+                isAllSearch: $viewModel.isAllSearch,
+                showingDuplicates: $viewModel.showingDuplicates,
+                showingBlacklist: $viewModel.showingBlacklist
+            )
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity)
             List {

@@ -30,6 +30,7 @@ final class HTTPClient: HTTPClientProtocol {
 
     func sendRequest(_ request: URLRequest) async throws -> Data {
         let modifiedRequest = applyConfiguration(to: request)
+        dump(modifiedRequest)
         return try await performRequest(modifiedRequest)
     }
 }
@@ -57,6 +58,7 @@ private extension HTTPClient {
             let (data, response) = try await urlSession.data(for: request)
             return try handleResponse(response, data: data)
         } catch let error as URLError {
+            print(error)
             throw map(error: error)
         }
     }
