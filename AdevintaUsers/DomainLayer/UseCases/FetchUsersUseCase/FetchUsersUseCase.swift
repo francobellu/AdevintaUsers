@@ -5,7 +5,7 @@
 //  Created by Franco Bellu on 26/1/25.
 //
 
-class FetchUsersUseCase: FetchUsersUseCaseProtocol {
+final class FetchUsersUseCase: FetchUsersUseCaseProtocol {
     let userRepository: UserRepositoryProtocol
 
     init(userRepository: UserRepositoryProtocol) {

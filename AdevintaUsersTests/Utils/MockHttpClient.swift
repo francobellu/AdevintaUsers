@@ -1,7 +1,7 @@
 import Foundation
 @testable import AdevintaUsers
 
-class MockHttpClient: HTTPClientProtocol,  @unchecked Sendable {
+final class MockHttpClient: HTTPClientProtocol,  @unchecked Sendable {
     var data: Data?
     var response: URLResponse?
     var error: HTTPClientError?

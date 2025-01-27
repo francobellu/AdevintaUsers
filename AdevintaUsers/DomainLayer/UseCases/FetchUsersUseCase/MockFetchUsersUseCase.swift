@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockFetchUsersUseCase: FetchUsersUseCaseProtocol {
+final class MockFetchUsersUseCase: FetchUsersUseCaseProtocol, @unchecked Sendable {
     var usersResultStub: Result <[User], UserListScreenModelError>!
     var usersResultFactory: (() -> Result <[User], UserListScreenModelError>)!
     var isLongOperation: Bool

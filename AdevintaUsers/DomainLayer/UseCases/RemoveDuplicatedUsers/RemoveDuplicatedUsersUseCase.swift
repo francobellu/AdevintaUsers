@@ -1,9 +1,15 @@
 import Foundation
 
-struct RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
+class RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
     func execute(users: [User]) -> [User] {
-        // Using Set to remove duplicates efficiently
-        let uniqueUsers = Array(Set(users))
-        return uniqueUsers
+        var seen = Set<User>()
+        return users.filter { user in
+            if seen.contains(user) {
+                return false
+            } else {
+                seen.insert(user)
+                return true
+            }
+        }
     }
 }

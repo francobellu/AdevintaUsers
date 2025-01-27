@@ -7,7 +7,7 @@ enum UserListScreenModelError: Error {
 }
 
 @MainActor
-class UserListScreenModel: ObservableObject {
+final class UserListScreenModel: ObservableObject {
     // MARK: - Observed properties
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var users: [User] = []
@@ -30,13 +30,14 @@ class UserListScreenModel: ObservableObject {
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
     private let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
 
-    private let usersPerPage = 7
-    private var currentPage = 1
+    private let usersPerBatch: Int
     init(
+        usersPerBatch: Int,
         fetchUsersUseCase: FetchUsersUseCaseProtocol,
         deleteUserUseCase: DeleteUserUseCaseProtocol,
         removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
     ) {
+        self.usersPerBatch = usersPerBatch
         self.fetchUsersUseCase = fetchUsersUseCase
         self.deleteUserUseCase = deleteUserUseCase
         self.removeDuplicatedUsersUseCase = removeDuplicatedUsersUseCase
@@ -46,7 +47,7 @@ class UserListScreenModel: ObservableObject {
         hasMorePages = true
         do {
             asyncOp = .inProgress
-            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerPage)
+            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerBatch)
             users.append(contentsOf: newUsers)
             // TODO: also need to save them in storage... move to fetch usecase
 

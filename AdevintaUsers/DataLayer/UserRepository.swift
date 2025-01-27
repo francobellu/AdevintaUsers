@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserRepository: UserRepositoryProtocol {
+final class UserRepository: UserRepositoryProtocol {
     let apiClient: ApiClientProtocol
 
     init(apiClient: ApiClientProtocol) {

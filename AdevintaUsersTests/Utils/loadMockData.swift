@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Token {}
+final class Token {}
 public func loadMockData(fromFile fileName: String) -> Data {
     let bundle = Bundle(for: Token.self)
     guard let url = bundle.url(

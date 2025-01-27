@@ -5,7 +5,7 @@
 //  Created by Franco Bellu on 26/1/25.
 //
 
-class DeleteUserUseCase: DeleteUserUseCaseProtocol {
+final class DeleteUserUseCase: DeleteUserUseCaseProtocol {
     func execute(_ user: User, users: [User]) -> [User] {
         var result = users
         result.removeAll { $0.id == user.id}

@@ -39,9 +39,12 @@ struct AdevintaUsersApp: App {
         return removeDuplicatedUsersUseCase
     }()
 
+    let usersPerBatch = 7
+    
     var body: some Scene {
         WindowGroup {
             let viewModel = UserListScreenModel(
+                usersPerBatch: usersPerBatch,
                 fetchUsersUseCase: fetchUsersUseCase,
                 deleteUserUseCase: deleteUserUseCase,
                 removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase

@@ -17,6 +17,7 @@ extension UserListScreenModel {
         let removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
         
         return UserListScreenModel(
+            usersPerBatch: 7,
             fetchUsersUseCase: mockFetchUsersUseCase,
             deleteUserUseCase: mockDeleteUserUseCase,
             removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase

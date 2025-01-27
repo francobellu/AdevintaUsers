@@ -11,6 +11,7 @@ struct UserListScreenModelSearchTests {
     var mockUsers: [User]!
 
     let usersStubCount = 3
+    let usersPerBatch = 7
 
     init() {
         // Setup mock useCases
@@ -21,6 +22,7 @@ struct UserListScreenModelSearchTests {
         removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
 
         sut = UserListScreenModel(
+            usersPerBatch: usersPerBatch,
             fetchUsersUseCase: fetchUsersUseCase,
             deleteUserUseCase: deleteUserUseCase,
             removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase

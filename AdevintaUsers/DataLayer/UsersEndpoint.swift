@@ -27,8 +27,11 @@ enum UsersEndpoint: EndpointProtocol {
 
     var queryItems: [URLQueryItem]? {
         switch self {
-        case .getUsers:
-            return [URLQueryItem(name: "results", value: "10")]
+        case .getUsers(let batchSize):
+            guard let _ = Int(String(describing: batchSize)) else {
+                return nil
+            }
+            return [URLQueryItem(name: "results", value: String(describing: batchSize))]
         }
     }
 }

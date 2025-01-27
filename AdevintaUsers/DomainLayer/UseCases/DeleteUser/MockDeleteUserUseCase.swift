@@ -6,7 +6,7 @@
 //
 
 
-class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
+final class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
     var errorStub: DeleteUserUseCaseError!
 
     func execute(_ user: User, users: [User]) -> [User] {
