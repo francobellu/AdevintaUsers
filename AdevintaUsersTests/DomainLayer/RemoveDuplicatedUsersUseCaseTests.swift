@@ -28,8 +28,10 @@ struct RemoveDuplicatedUsersUseCaseTests {
 
         let ( uniqueUsers, duplicates) = sut.execute(users: users)
         users = uniqueUsers
+
         // Them
         #expect(users.count == initialUserCount - 1)
+        #expect(duplicates.count == 1)
     }
 
     @Test("test_execute_userWithDifferentIdIsNotRemoved")
@@ -45,6 +47,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
 
         // Them
         #expect(users.count == initialUserCount)
+        #expect(duplicates.count == 0)
     }
 
     @Test("")
@@ -60,6 +63,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
 
         // Them
         #expect(users.count == initialUserCount)
+        #expect(duplicates.count == 0)
     }
 
     @Test("test_execute_userWithDifferentNameIsNoRemoved")
@@ -75,6 +79,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
 
         // Them
         #expect(users.count == initialUserCount)
+        #expect(duplicates.count == 0)
     }
 
     @Test("test_execute_userWithDifferentTelephoneIsRemoved")
@@ -90,6 +95,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
 
         // Them
         #expect(users.count == initialUserCount - 1)
+        #expect(duplicates.count == 1)
     }
 }
 
