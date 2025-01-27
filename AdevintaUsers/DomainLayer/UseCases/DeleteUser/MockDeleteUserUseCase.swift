@@ -1,11 +1,3 @@
-//
-//  MockDeleteUserUseCase.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 26/1/25.
-//
-
-
 final class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
     var errorStub: DeleteUserUseCaseError!
 

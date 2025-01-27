@@ -30,7 +30,7 @@ final class UserListScreenModel: ObservableObject {
 
     // MARK: - Static strings
     let deleteStr = "Delete"
-    let titleStr = "Users"
+    let titleStr = "RandomUser Inc. Users"
     let searchBarStr = "Search users"
     let errorAlertStr = "Error"
     let toogleSearchAnyStr = "Search ANY"

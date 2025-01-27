@@ -1,10 +1,3 @@
-//
-//  UserRowView.swift
-//  AdevistaUsers
-//
-//  Created by Franco Bellu on 22/1/25.
-//
-
 import SwiftUI
 
 struct UserRowView: View {

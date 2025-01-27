@@ -1,10 +1,3 @@
-//
-//  AdevintaUsersApp.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 22/1/25.
-//
-
 import SwiftUI
 
 @main

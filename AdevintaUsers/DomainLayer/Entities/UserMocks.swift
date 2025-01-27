@@ -1,10 +1,3 @@
-//
-//  UserMocks.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 23/1/25.
-//
-
 import SwiftUI
 
 #if DEBUG

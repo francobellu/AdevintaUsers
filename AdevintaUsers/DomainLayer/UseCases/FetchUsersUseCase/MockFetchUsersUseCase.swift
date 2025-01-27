@@ -1,11 +1,3 @@
-//
-//  MockFetchUsersUseCase.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 26/1/25.
-//
-
-
 import Foundation
 
 final class MockFetchUsersUseCase: FetchUsersUseCaseProtocol, @unchecked Sendable {

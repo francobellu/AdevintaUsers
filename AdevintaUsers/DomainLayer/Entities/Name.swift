@@ -1,10 +1,3 @@
-//
-//  Name.swift
-//  RandomUser
-//
-//  Created by Franco Bellu on 22/1/25.
-//
-
 import Foundation
 
 struct Name {

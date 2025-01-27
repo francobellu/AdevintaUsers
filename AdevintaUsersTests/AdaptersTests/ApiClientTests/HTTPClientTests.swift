@@ -6,15 +6,21 @@ import Foundation
 struct HTTPClientTests {
     var sut: HTTPClient!
     var mockSession: MockURLSession!
-    var mockDonfiguration: HTTPClientConfiguration
+    var mockConfiguration: HTTPClientConfiguration
 
     let stubSuccessData = "Success".data(using: .utf8)!
     let stubURL = URL(string: "https://example.com")!
 
     init()  {
         mockSession = MockURLSession()
-        mockDonfiguration = .default
-        sut = HTTPClient(urlSession: mockSession, configuration: mockDonfiguration)
+        let httpRequestTimeoutInterval = 10.0
+        let httpClientConfiguration = HTTPClientConfiguration(
+            defaultHeaders: [:],
+            timeoutInterval: httpRequestTimeoutInterval,
+            cachePolicy: .useProtocolCachePolicy
+        )
+        mockConfiguration = httpClientConfiguration
+        sut = HTTPClient(urlSession: mockSession, configuration: mockConfiguration)
     }
 
     @Test("Successful request")

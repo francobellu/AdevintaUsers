@@ -1,10 +1,3 @@
-//
-//  AdevintaUsersUITestsLaunchTests.swift
-//  AdevintaUsersUITests
-//
-//  Created by Franco Bellu on 22/1/25.
-//
-
 import XCTest
 
 final class AdevintaUsersUITestsLaunchTests: XCTestCase {

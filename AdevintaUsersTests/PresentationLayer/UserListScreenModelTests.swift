@@ -40,7 +40,7 @@ struct UserListScreenModelTests {
 
         // Then
         #expect(sut.deleteStr == "Delete")
-        #expect(sut.titleStr == "Adevinta Users")
+        #expect(sut.titleStr == "RandomUser Inc. Users")
         #expect(sut.searchBarStr == "Search users")
         #expect(sut.errorAlertStr == "Error")
     }

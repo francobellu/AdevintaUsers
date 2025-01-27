@@ -1,9 +1,3 @@
-//
-//  APIClientProtocol.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 26/1/25.
-//
 import Foundation
 
 protocol ApiClientProtocol: Sendable {

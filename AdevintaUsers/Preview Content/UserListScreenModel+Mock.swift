@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 26/1/25.
-//
-
 extension UserListScreenModel {
     static func previewMock(
         usersResult: Result<[User], UserListScreenModelError> = .success(User.randomMocks(num: 20)),

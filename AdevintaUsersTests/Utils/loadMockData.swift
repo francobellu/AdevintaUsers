@@ -1,10 +1,3 @@
-//
-//  loadMockData.swift
-//  CleanWithCursor
-//
-//  Created by Franco Bellu on 20/12/24.
-//
-
 import Foundation
 
 final class Token {}

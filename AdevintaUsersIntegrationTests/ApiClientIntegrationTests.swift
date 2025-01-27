@@ -8,8 +8,13 @@ struct ApiClientIntegrationTests {
         let jsonDecoder = JSONDecoder()
         let jsonEncoder = JSONEncoder()
         let urlSession = URLSession.shared
-        let configuration = HTTPClientConfiguration.default
-        let httpClient = HTTPClient(urlSession: urlSession, configuration: configuration)
+        let httpRequestTimeoutInterval = 10.0
+        let httpClientConfiguration = HTTPClientConfiguration(
+            defaultHeaders: [:],
+            timeoutInterval: httpRequestTimeoutInterval,
+            cachePolicy: .useProtocolCachePolicy
+        )
+        let httpClient = HTTPClient(urlSession: urlSession, configuration: httpClientConfiguration)
         let apiClientConfiguration = ApiClientConfiguration.default()
         sut = ApiClient(
             configuration: apiClientConfiguration,

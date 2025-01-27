@@ -1,10 +1,3 @@
-//
-//  AsyncOperation.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 23/1/25.
-//
-
 enum AsyncOperation<T> {
     case failed(_ error: any Error)
     case inProgress

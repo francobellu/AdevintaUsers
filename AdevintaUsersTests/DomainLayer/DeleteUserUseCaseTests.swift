@@ -1,10 +1,3 @@
-//
-//  DeleteUserUseCaseTests.swift
-//  AdevintaUsersTests
-//
-//  Created by Franco Bellu on 26/1/25.
-//
-
 @testable import AdevintaUsers
 import Testing
 

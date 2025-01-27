@@ -1,11 +1,3 @@
-//
-//  UserIdDTO.swift
-//  RandomUser
-//
-//  Created by Franco Bellu on 22/1/25.
-//
-
-
 struct UserIdDTO: Codable {
     let name: String
     let value: String?

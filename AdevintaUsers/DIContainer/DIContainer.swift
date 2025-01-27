@@ -1,10 +1,3 @@
-//
-//  DIContainer.swift
-//  AdevintaUsers
-//
-//  Created by Franco Bellu on 27/1/25.
-//
-
 import Foundation
 
 @MainActor
@@ -14,7 +7,7 @@ public class DIContainer {
     let urlSession = URLSession.shared
 
     let usersPerBatch = 7
-    let httpRequestTimeoutInterval = 3.0
+    let httpRequestTimeoutInterval = 30.0
 
     lazy var fetchUsersUseCase: FetchUsersUseCase = {
         let urlSession = urlSession
