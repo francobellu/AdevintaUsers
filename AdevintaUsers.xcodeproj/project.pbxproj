@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */; };
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAdapterTests.swift; sourceTree = "<group>"; };
 		C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdevintaUsersTests.xctestplan; sourceTree = "<group>"; };
 		C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdevintaUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7672AF62D48DF040003384C /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				C7672AF72D48DF170003384C /* UserDefaults */,
+				C7E6E1782D46E0420056AE35 /* DataLayer */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		C7672AF72D48DF170003384C /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		C7D7B8872D41A6E700AC4E79 = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +164,6 @@
 			children = (
 				C7E6E2A72D47C6CF0056AE35 /* AdaptersTests */,
 				C7E6E28D2D47BF200056AE35 /* Utils */,
-				C7E6E1782D46E0420056AE35 /* DataLayer */,
 				C7E6E1022D468E8C0056AE35 /* DomainLayer */,
 				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
 			);
@@ -184,6 +202,7 @@
 		C7E6E2A72D47C6CF0056AE35 /* AdaptersTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7672AF62D48DF040003384C /* Adapters */,
 				C7E6E2A62D47C6CF0056AE35 /* ApiClientTests */,
 			);
 			path = AdaptersTests;
@@ -387,6 +406,7 @@
 			files = (
 				C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */,
 				C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */,
+				C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */,
 				C7E6E2AA2D47C6CF0056AE35 /* ApiClientTests.swift in Sources */,
 				C7E6E2AB2D47C6CF0056AE35 /* MockURLSession.swift in Sources */,
 				C7E6E2AC2D47C6CF0056AE35 /* HTTPClientTests.swift in Sources */,

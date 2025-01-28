@@ -2,12 +2,18 @@ import Foundation
 
 @MainActor
 public class DIContainer {
+    let usersPerBatch = 7
+    let httpRequestTimeoutInterval = 30.0
+
     let jsonDecoder = JSONDecoder()
     let jsonEncoder = JSONEncoder()
     let urlSession = URLSession.shared
-
-    let usersPerBatch = 7
-    let httpRequestTimeoutInterval = 30.0
+    let userDefaults = UserDefaults.standard
+    
+    lazy var userDefaultsAdapter: UserDefaultsAdapter = {
+        let userDefaultsAdapter = UserDefaultsAdapter(defaults: userDefaults)
+        return userDefaultsAdapter
+    }()
 
     lazy var fetchUsersUseCase: FetchUsersUseCase = {
         let urlSession = urlSession
