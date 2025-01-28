@@ -6,11 +6,11 @@ struct RemoveDuplicatedUsersUseCaseTests {
     let sut: RemoveDuplicatedUsersUseCase
 
     // Stubs
-    let userJohnDoe =                  User(id: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentId =      User(id: UserId(name: "John", value: "BBB"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentName =    User(id: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Smith"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentEmail =   User(id: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "johnAA@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentTel =     User(id: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "99", picture: Picture(large: "xxx"))
+    let userJohnDoe =                  User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
+    let userJohnDoe_differentId =      User(userId: UserId(name: "John", value: "BBB"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
+    let userJohnDoe_differentName =    User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Smith"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
+    let userJohnDoe_differentEmail =   User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "johnAA@example.com", phone: "12", picture: Picture(large: "xxx"))
+    let userJohnDoe_differentTel =     User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "99", picture: Picture(large: "xxx"))
 
 
     init() {

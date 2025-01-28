@@ -8,7 +8,7 @@ struct UserListSuccessView: View {
             ToolbarView(
                 usersCount: viewModel.filteredUsers.count,
                 isTyping: viewModel.isTyping,
-                duplicateUsers: viewModel.duplcatesUsers,
+                duplicateUsers: viewModel.duplicatedUsers,
                 blacklistedUsers: viewModel.blacklistedUsers,
                 isAllSearch: $viewModel.isAllSearch,
                 showingDuplicates: $viewModel.showingDuplicates,
@@ -33,10 +33,8 @@ struct UserListSuccessView: View {
                         }
                 }
                 if viewModel.hasMorePages {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .foregroundColor(.black)
-                        .foregroundColor(.red)
+                    Circle()
+                        .foregroundColor(.clear)
                         .task {
                             await viewModel.loadUsers()
                         }

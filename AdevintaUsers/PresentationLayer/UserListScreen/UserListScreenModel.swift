@@ -20,7 +20,7 @@ final class UserListScreenModel: ObservableObject {
     // MARK: - Observed properties
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var users: [User] = []
-    @Published var duplcatesUsers: [User] = []
+    @Published var duplicatedUsers: [User] = []
     @Published var blacklistedUsers: [User] = []
     @Published var searchTerm = ""
     @Published var selectedUser: User?
@@ -68,8 +68,11 @@ final class UserListScreenModel: ObservableObject {
             let (uniqueUsers, duplicates) = removeDuplicatedUsersUseCase.execute(users: users)
             // TODO: also need to filter out blacklisted users
             users = uniqueUsers
-            duplcatesUsers = duplicates
-            asyncOp = nil
+            if !duplicates.isEmpty {
+                duplicatedUsers.append(contentsOf: duplicates)
+            }
+
+            asyncOp = .none
         } catch {
             asyncOp = .failed(UserListScreenModelError.loadingFailure)
         }
@@ -99,7 +102,7 @@ final class UserListScreenModel: ObservableObject {
 
     var displayedUsers: [User] {
         if showingDuplicates {
-            return duplcatesUsers
+            return duplicatedUsers
         } else if showingBlacklist {
             return blacklistedUsers
         } else {

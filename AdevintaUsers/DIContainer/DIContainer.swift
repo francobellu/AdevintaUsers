@@ -2,7 +2,7 @@ import Foundation
 
 @MainActor
 public class DIContainer {
-    let usersPerBatch = 100
+    let usersPerBatch = 10
     let httpRequestTimeoutInterval = 30.0
 
     let jsonDecoder = JSONDecoder()

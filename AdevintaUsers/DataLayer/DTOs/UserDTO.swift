@@ -8,7 +8,7 @@ struct UserDTO: Codable {
     let picture: PictureDTO
 
     init(from user: User) {
-        let userIdDTO = UserIdDTO(from: user.id)
+        let userIdDTO = UserIdDTO(from: user.userId)
         let nameDTO = NameDTO(from: user.name)
         let pictureDTO = PictureDTO(from: user.picture)
         self.id = userIdDTO
@@ -20,9 +20,9 @@ struct UserDTO: Codable {
 
     func toDomain() -> User {
         User(
-            id: UserId(name: id.name, value: id.value ?? ""),
+            userId: UserId(name: id.name, value: id.value ?? ""),
             name: name.toDomain(),
-            email: email,
+            email: email.lowercased(),
             phone: phone,
             picture: picture.toDomain()
         )

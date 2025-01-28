@@ -23,7 +23,10 @@ enum UsersEndpoint: EndpointProtocol {
             guard let _ = Int(String(describing: batchSize)) else {
                 return nil
             }
-            return [URLQueryItem(name: "results", value: String(describing: batchSize))]
+            return [
+                URLQueryItem(name: "results", value: String(describing: batchSize)),
+                URLQueryItem(name: "seed", value: String(describing: "foobar"))
+            ]
         }
     }
 }

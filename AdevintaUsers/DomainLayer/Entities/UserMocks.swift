@@ -19,7 +19,7 @@ extension User {
         let lastName = lastNames.randomElement() ?? "Test"
 
         let user = User(
-            id: UserId(
+            userId: UserId(
                 name: "\(firstName)\(lastName)",
                 value: UUID().uuidString
             ),

@@ -13,6 +13,7 @@ class RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
                 return true
             }
         }
+
         print("Unique: ", uniqueUsers)
         print("\nduplicates", duplicates)
         return (unique: uniqueUsers, duplicates: duplicates)
