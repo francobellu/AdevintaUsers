@@ -40,6 +40,9 @@ struct UserListSuccessView: View {
                         }
                 }
             }
+            .task {
+                await viewModel.getBlacklistedUsers()
+            }
             .searchable(
                 text: $viewModel.searchTerm,
                 prompt: viewModel.searchBarStr

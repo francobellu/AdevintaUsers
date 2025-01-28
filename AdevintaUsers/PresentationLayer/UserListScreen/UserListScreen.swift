@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct UserListScreen: View {
-    @StateObject var viewModel: UserListScreenModel // TODO: 1 use Observed Object
+    @ObservedObject var viewModel: UserListScreenModel
     var body: some View {
         NavigationView {
             ZStack {

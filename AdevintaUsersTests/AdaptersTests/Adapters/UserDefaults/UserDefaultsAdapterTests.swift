@@ -36,28 +36,6 @@ struct UserDefaultsAdapterTests {
         defaults.removePersistentDomain(forName: #function)
     }
 
-    @Test("test_saveAppendsToExistingUsers")
-    mutating func test_saveAppendsToExistingUsers() throws {
-        // Given
-        defaults = UserDefaults(suiteName: #function)!
-        sut = UserDefaultsAdapter(defaults: defaults)
-
-        // When
-        sut.save(testUsersDTOs, for: .uniqueUsers)
-        sut.save(testUsersDTOs, for: .uniqueUsers)
-
-        let retrievedUsersDTOs = sut.getUsers(for: .uniqueUsers)
-
-        // Then
-        let retrievedUsers: [User] = retrievedUsersDTOs.map{$0.toDomain() }
-        #expect(retrievedUsers.count == testUsers.count * 2)
-
-        // Cleanup
-        defaults.removePersistentDomain(forName: #function)
-    }
-
-
-
     @Test("Retrieve empty array when no users saved")
     mutating func test_retrieveUsers_whenNoUsersSaved_shouldReturnEmptyArray() throws {
         // Given

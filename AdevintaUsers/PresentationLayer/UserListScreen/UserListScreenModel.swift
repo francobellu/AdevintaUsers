@@ -41,6 +41,7 @@ final class UserListScreenModel: ObservableObject {
     // MARK: - Use cases
     private let fetchUsersUseCase: FetchUsersUseCaseProtocol
     private let deleteUserUseCase: DeleteUserUseCaseProtocol
+    private let getDeletedUserUseCase: GetDeletedUserUseCaseProtocol
     private let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
 
     private let usersPerBatch: Int
@@ -48,11 +49,13 @@ final class UserListScreenModel: ObservableObject {
         usersPerBatch: Int,
         fetchUsersUseCase: FetchUsersUseCaseProtocol,
         deleteUserUseCase: DeleteUserUseCaseProtocol,
+        getDeletedUserUseCase: GetDeletedUserUseCaseProtocol,
         removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol
     ) {
         self.usersPerBatch = usersPerBatch
         self.fetchUsersUseCase = fetchUsersUseCase
         self.deleteUserUseCase = deleteUserUseCase
+        self.getDeletedUserUseCase = getDeletedUserUseCase
         self.removeDuplicatedUsersUseCase = removeDuplicatedUsersUseCase
     }
 
@@ -66,8 +69,16 @@ final class UserListScreenModel: ObservableObject {
             users.append(contentsOf: newUsers)
 
             let (uniqueUsers, duplicates) = removeDuplicatedUsersUseCase.execute(users: users)
-            // TODO: also need to filter out blacklisted users
-            users = uniqueUsers
+
+            // Filter out blacklisted users from uniqueUsers
+            blacklistedUsers = getDeletedUserUseCase.execute()
+            let filteredUniqueUsers = uniqueUsers.filter { user in
+                !blacklistedUsers.contains { blacklistedUser in
+                    blacklistedUser.id == user.id
+                }
+            }
+
+            users = filteredUniqueUsers
             if !duplicates.isEmpty {
                 duplicatedUsers.append(contentsOf: duplicates)
             }
@@ -78,9 +89,13 @@ final class UserListScreenModel: ObservableObject {
         }
     }
 
+    func getBlacklistedUsers() async {
+        blacklistedUsers = getDeletedUserUseCase.execute()
+    }
+
     func deleteUser(_ user: User) async {
         users = deleteUserUseCase.execute(user, users: users)
-        blacklistedUsers.append(user)
+        await getBlacklistedUsers()
     }
 
 

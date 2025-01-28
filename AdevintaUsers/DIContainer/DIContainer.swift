@@ -15,7 +15,7 @@ public class DIContainer {
         return userDefaultsAdapter
     }()
 
-    lazy var fetchUsersUseCase: FetchUsersUseCase = {
+    lazy var userRepository: UserRepository = {
         let urlSession = urlSession
         let httpClientConfiguration = HTTPClientConfiguration(
             defaultHeaders: [:],
@@ -31,14 +31,23 @@ public class DIContainer {
             jsonEncoder: jsonEncoder
         )
         let userRepository = UserRepository(apiClient: apiClient, userDefaultsAdapter: userDefaultsAdapter)
+        return userRepository
+    }()
+
+    lazy var fetchUsersUseCase: FetchUsersUseCase = {
 
         let fetchUsersUseCase = FetchUsersUseCase(userRepository: userRepository)
         return fetchUsersUseCase
     }()
 
-    let deleteUserUseCase: DeleteUserUseCase = {
-        let deleteUserUseCase = DeleteUserUseCase()
+    lazy var deleteUserUseCase: DeleteUserUseCase = {
+        let deleteUserUseCase = DeleteUserUseCase(userRepository: userRepository)
         return deleteUserUseCase
+    }()
+
+    lazy var getDeleteUserUseCase: GetDeletedUserUseCase = {
+        let getDeleteUserUseCase = GetDeletedUserUseCase(userRepository: userRepository)
+        return getDeleteUserUseCase
     }()
 
     let removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCase = {
@@ -51,6 +60,7 @@ public class DIContainer {
             usersPerBatch: usersPerBatch,
             fetchUsersUseCase: fetchUsersUseCase,
             deleteUserUseCase: deleteUserUseCase,
+            getDeletedUserUseCase: getDeleteUserUseCase,
             removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase
         )
     }()

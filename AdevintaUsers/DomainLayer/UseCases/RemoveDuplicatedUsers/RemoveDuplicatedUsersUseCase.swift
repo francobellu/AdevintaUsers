@@ -19,3 +19,4 @@ class RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
         return (unique: uniqueUsers, duplicates: duplicates)
     }
 }
+

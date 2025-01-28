@@ -25,7 +25,7 @@ enum UsersEndpoint: EndpointProtocol {
             }
             return [
                 URLQueryItem(name: "results", value: String(describing: batchSize)),
-                URLQueryItem(name: "seed", value: String(describing: "foobar"))
+//                URLQueryItem(name: "seed", value: String(describing: "foobar"))
             ]
         }
     }

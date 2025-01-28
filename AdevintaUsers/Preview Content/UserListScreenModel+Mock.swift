@@ -7,12 +7,14 @@ extension UserListScreenModel {
         mockFetchUsersUseCase.usersResultStub = usersResult
 
         let mockDeleteUserUseCase = MockDeleteUserUseCase()
+        let mockGetDeleteUserUseCase = MockGetDeletedUserUseCase()
         let removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
         
         return UserListScreenModel(
             usersPerBatch: 7,
             fetchUsersUseCase: mockFetchUsersUseCase,
-            deleteUserUseCase: mockDeleteUserUseCase,
+            deleteUserUseCase: mockDeleteUserUseCase, 
+            getDeletedUserUseCase: mockGetDeleteUserUseCase,
             removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase
         )
     }

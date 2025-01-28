@@ -7,6 +7,7 @@ struct UserListScreenModelSearchTests {
     let sut: UserListScreenModel
     var fetchUsersUseCase: MockFetchUsersUseCase
     var deleteUserUseCase: MockDeleteUserUseCase
+    var getDeletedUserUseCase: MockGetDeletedUserUseCase
     var removeDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCase
     var mockUsers: [User]!
 
@@ -19,12 +20,14 @@ struct UserListScreenModelSearchTests {
         mockUsers = User.randomMocks(num: usersStubCount)
         fetchUsersUseCase.usersResultStub = .success(mockUsers)
         deleteUserUseCase = MockDeleteUserUseCase()
+        getDeletedUserUseCase = MockGetDeletedUserUseCase()
         removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
 
         sut = UserListScreenModel(
             usersPerBatch: usersPerBatch,
             fetchUsersUseCase: fetchUsersUseCase,
             deleteUserUseCase: deleteUserUseCase,
+            getDeletedUserUseCase: getDeletedUserUseCase,
             removeDuplicatedUsersUseCase: removeDuplicatedUsersUseCase
         )
     }

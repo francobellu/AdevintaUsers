@@ -7,3 +7,10 @@ final class MockDeleteUserUseCase: DeleteUserUseCaseProtocol {
             return result
     }
 }
+
+final class MockGetDeletedUserUseCase: GetDeletedUserUseCaseProtocol {
+
+    func execute() -> [User] {
+        []
+    }
+}

@@ -29,6 +29,28 @@ final class UserRepository: UserRepositoryProtocol {
 
         return users
     }
+
+    func addToBlacklist(user: User) {
+        let userDTO = UserDTO(from: user)
+
+        // First append the user to the cached list
+        var blacklistedUsers = userDefaultsAdapter.getUsers(for: .blacklistedUsers)
+        if !blacklistedUsers.contains(where: { user == $0.toDomain() }) {
+            blacklistedUsers.append(userDTO)
+            print("APPENDING  to blacklist: ", userDTO)
+        }
+        
+        userDefaultsAdapter.save(blacklistedUsers, for: .blacklistedUsers)
+
+    }
+
+    func loadBlacklist() -> [User] {
+        let cachedBlacklistedUsersDTOs = userDefaultsAdapter.getUsers(for: .blacklistedUsers)
+        let cachedBlacklistedUsers = cachedBlacklistedUsersDTOs.map{$0.toDomain()}
+
+        print("blacklist: cachedBlacklistedUsers)")
+        return cachedBlacklistedUsers
+    }
 }
 
 extension UserRepository {
@@ -38,9 +60,3 @@ extension UserRepository {
         return users
     }
 }
-
-
-
-
-
-

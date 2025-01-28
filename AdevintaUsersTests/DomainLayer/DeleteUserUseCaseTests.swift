@@ -4,9 +4,11 @@ import Testing
 @Suite("DeleteUserUseCase Tests")
 struct DeleteUserUseCaseTests {
     let sut: DeleteUserUseCase
+    var userRepository: MockUserRepository!
 
     init() {
-        sut = DeleteUserUseCase()
+        userRepository = MockUserRepository()
+        sut = DeleteUserUseCase(userRepository: userRepository)
     }
 
     @Test("test deletion of one user from a list of users reduces its size by one")
@@ -14,12 +16,16 @@ struct DeleteUserUseCaseTests {
         // Given
         let users = User.randomMocks(num: 10)
         let user = users.first!
+        userRepository.userStubs = .success([user])
 
         // When
         let result = sut.execute(user, users: users)
 
         // Them
-        #expect(result.count == 9)
+        var newUsers = users
+        let userIndex = newUsers.firstIndex(of: user)!
+        newUsers.remove(at: userIndex)
+        #expect(newUsers == result)
     }
 }
 
