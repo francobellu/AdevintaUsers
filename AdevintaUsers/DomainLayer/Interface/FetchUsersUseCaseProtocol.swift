@@ -1,7 +1,7 @@
 import Foundation
 
 protocol FetchUsersUseCaseProtocol: Sendable {
-    func execute(batchSize: Int) async throws -> [User]
+    func execute(batchSize: Int,  initialLoad: Bool) async throws -> [User]
 }
 
 

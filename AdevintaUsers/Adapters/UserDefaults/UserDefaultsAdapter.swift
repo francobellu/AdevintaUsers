@@ -23,7 +23,9 @@ final class UserDefaultsAdapter: UserDefaultsAdapterProtocol {
 
     // Store users ( overwrites existing)
     func save(_ users: [UserDTO], for key: Key) {
-        let encodedData = try? JSONEncoder().encode(users)
+        let exisingUsers = getUsers(for: key)
+        let totalUsers = exisingUsers + users
+        let encodedData = try? JSONEncoder().encode(totalUsers)
         defaults.set(encodedData, forKey: key.rawValue)
     }
 

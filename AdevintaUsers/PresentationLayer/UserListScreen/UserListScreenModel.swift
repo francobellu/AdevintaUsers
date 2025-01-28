@@ -57,14 +57,16 @@ final class UserListScreenModel: ObservableObject {
     }
 
     func loadUsers() async {
+        if case .inProgress = asyncOp { return }
         hasMorePages = true
         do {
             asyncOp = .inProgress
-            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerBatch)
+            let initialLoad = users.isEmpty
+            let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerBatch, initialLoad: initialLoad)
             users.append(contentsOf: newUsers)
-            // TODO: also need to save them in storage... move to fetch usecase
 
             let (uniqueUsers, duplicates) = removeDuplicatedUsersUseCase.execute(users: users)
+            // TODO: also need to filter out blacklisted users
             users = uniqueUsers
             duplcatesUsers = duplicates
             asyncOp = nil

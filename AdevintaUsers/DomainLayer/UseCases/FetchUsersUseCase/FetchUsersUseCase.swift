@@ -5,7 +5,7 @@ final class FetchUsersUseCase: FetchUsersUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func execute(batchSize: Int) async throws -> [User] {
-        try await userRepository.fetchUsers(batchSize: batchSize)
+    func execute(batchSize: Int, initialLoad: Bool = false) async throws -> [User] {
+        try await userRepository.fetchUsers(batchSize: batchSize, initialLoad: initialLoad)
     }
 }

@@ -67,14 +67,14 @@ struct UserRepositoryTests {
     }
 
     @Test("test_fetchUsers_loadsUsersFromCache")   // TODO: rename fetch to load
-    func test_fetchUsers_usersLoadedFromCache() async {
+    func test_fetchUsers_usersLoadedFromCache() async throws {
         // Given
         let cachedUsers = User.randomMocks(num: 10)
         let cachedUsersDTOs = cachedUsers.map{UserDTO(from: $0)}
         mockUserDefaultsAdapter.getUsersMock = cachedUsersDTOs
 
         // When
-        let result: [User] = try! await sut.fetchUsers(batchSize: batchSize)
+        let result: [User] = try await sut.fetchUsers(batchSize: batchSize, initialLoad: true)
 
         // Then
         #expect(result == cachedUsers)
@@ -95,6 +95,32 @@ struct UserRepositoryTests {
         #expect(savedUsers == apiUsers)
         #expect(mockUserDefaultsAdapter.lastUsedKey == .uniqueUsers)
     }
+
+    @Test("test_fetchUsers_savesToCacheAppendingToExisting")
+    func test_fetchUsers_savesToCacheAppendingToExisting() async throws {
+        // Given
+        var users = User.randomMocks(num: batchSize)
+        var apiUsersDTOs = users.map(UserDTO.init)
+        var usedResponseDTO = UsersResponseDTO(results: apiUsersDTOs, info: InfoDTO(results: batchSize))
+
+        let batchSize = 2
+        
+        mockApiClient.setMockData(usedResponseDTO, for: userEndpoint)
+        let reusult = try await sut.fetchUsers(batchSize: batchSize)
+
+        users = User.randomMocks(num: batchSize)
+        apiUsersDTOs = users.map(UserDTO.init)
+        usedResponseDTO = UsersResponseDTO(results: apiUsersDTOs, info: InfoDTO(results: batchSize))
+
+        mockApiClient.setMockData(usedResponseDTO, for: userEndpoint)
+
+        // When
+        let reusult2 = try await sut.fetchUsers(batchSize: batchSize)
+
+        let totalresult = reusult + reusult2
+
+        // Then
+
+        #expect(totalresult.count == batchSize * 2)
+    }
 }
-
-

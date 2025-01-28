@@ -14,7 +14,7 @@ class RemoveDuplicatedUsersUseCase: RemoveDuplicatedUsersUseCaseProtocol {
             }
         }
         print("Unique: ", uniqueUsers)
-        print("\nSeen", seen)
+        print("\nduplicates", duplicates)
         return (unique: uniqueUsers, duplicates: duplicates)
     }
 }

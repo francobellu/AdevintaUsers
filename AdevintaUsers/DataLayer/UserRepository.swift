@@ -9,20 +9,18 @@ final class UserRepository: UserRepositoryProtocol {
         self.userDefaultsAdapter = userDefaultsAdapter
     }
 
-    func fetchUsers(batchSize: Int) async throws -> [User] {
+    func fetchUsers(batchSize: Int, initialLoad: Bool = false) async throws -> [User] {
         // First try to get users from cache
         let cachedUsers = userDefaultsAdapter.getUsers(for: .uniqueUsers)
 
-        // If we have cached users, return them
-        if !cachedUsers.isEmpty {
+        // load from cache if we have cached users and initial load
+        if !cachedUsers.isEmpty && initialLoad {
             return cachedUsers.map { $0.toDomain() }
         }
 
         // If we need more users, fetch from API
         let endpoint = UsersEndpoint.getUsers
-        let usersResponseDTO: UsersResponseDTO = try await apiClient.sendRequest(
-            endpoint: endpoint(batchSize)
-        )
+        let usersResponseDTO: UsersResponseDTO = try await apiClient.sendRequest(endpoint: endpoint(batchSize))
         let users = extractUsersFromResponseDTO(usersResponseDTO)
 
         // Save new users to cache

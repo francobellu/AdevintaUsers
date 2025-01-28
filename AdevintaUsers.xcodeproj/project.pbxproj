@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C7672AF72D48DF170003384C /* UserDefaults */,
-				C7E6E1782D46E0420056AE35 /* DataLayer */,
+				C7E6E2A62D47C6CF0056AE35 /* ApiClientTests */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -168,6 +168,7 @@
 				C7E6E28D2D47BF200056AE35 /* Utils */,
 				C7E6E1022D468E8C0056AE35 /* DomainLayer */,
 				C7D7B9162D424E4A00AC4E79 /* PresentationLayer */,
+				C7E6E1782D46E0420056AE35 /* DataLayer */,
 			);
 			path = AdevintaUsersTests;
 			sourceTree = "<group>";
@@ -206,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				C7672AF62D48DF040003384C /* Adapters */,
-				C7E6E2A62D47C6CF0056AE35 /* ApiClientTests */,
 			);
 			path = AdaptersTests;
 			sourceTree = "<group>";

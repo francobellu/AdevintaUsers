@@ -9,7 +9,7 @@ final class MockFetchUsersUseCase: FetchUsersUseCaseProtocol, @unchecked Sendabl
         self.isLongOperation = isLongOperation
     }
 
-    func execute(batchSize: Int) async throws -> [User] {
+    func execute(batchSize: Int, initialLoad: Bool) async throws -> [User] {
         let result: [User]
         if isLongOperation {
             try await Task.sleep(for: .seconds(100))
