@@ -3,10 +3,12 @@ import Foundation
 final class MockApiClient: ApiClientProtocol, @unchecked Sendable {
     var mockData: [String: Any] = [:]
     var mockError: (any Error)?
+    var isSendRequestCalled = false
     private(set) var lastEndpoint: (any EndpointProtocol)?
 
     init() {}
     func sendRequest<T: Decodable>(endpoint: any EndpointProtocol) async throws -> T {
+        isSendRequestCalled = true
         lastEndpoint = endpoint
 
         if let error = mockError {

@@ -1,13 +1,15 @@
 import Foundation
 
-protocol UserDefaultsAdapterProtocol {
+protocol UserDefaultsAdapterProtocol: Sendable {
     func save(_ users: [UserDTO], for key: UserDefaultsAdapter.Key)
     func getUsers(for key: UserDefaultsAdapter.Key) -> [UserDTO]
 }
 
+// Since UserDefaults is documented as thread safe we can safely skip compiler checks  using unchecked Sendable
+extension UserDefaults: @retroactive @unchecked Sendable {}
 
 // UserDefaultsAdapter is thread safe because UserDefaults is thread safe.
-class UserDefaultsAdapter: UserDefaultsAdapterProtocol {
+final class UserDefaultsAdapter: UserDefaultsAdapterProtocol {
     enum Key: String {
         case uniqueUsers = "unique_users"
         case blacklistedUsers = "blacklisted_user"

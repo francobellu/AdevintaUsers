@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */; };
+		C7672AF92D49253B0003384C /* MockUserDefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */; };
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAdapterTests.swift; sourceTree = "<group>"; };
+		C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsAdapter.swift; sourceTree = "<group>"; };
 		C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdevintaUsersTests.xctestplan; sourceTree = "<group>"; };
 		C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdevintaUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				C7E6E1792D46E0700056AE35 /* UserRepositoryTests.swift */,
+				C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 			files = (
 				C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */,
 				C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */,
+				C7672AF92D49253B0003384C /* MockUserDefaultsAdapter.swift in Sources */,
 				C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */,
 				C7E6E2AA2D47C6CF0056AE35 /* ApiClientTests.swift in Sources */,
 				C7E6E2AB2D47C6CF0056AE35 /* MockURLSession.swift in Sources */,

@@ -30,7 +30,7 @@ public class DIContainer {
             jsonDecoder: jsonDecoder,
             jsonEncoder: jsonEncoder
         )
-        let userRepository = UserRepository(apiClient: apiClient)
+        let userRepository = UserRepository(apiClient: apiClient, userDefaultsAdapter: userDefaultsAdapter)
 
         let fetchUsersUseCase = FetchUsersUseCase(userRepository: userRepository)
         return fetchUsersUseCase
