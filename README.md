@@ -14,7 +14,7 @@ The exercise has been completed with all requirements met + some extras
     - AdevintaUsersIntegrationTests  
     
 
-## Key Metrics ( see metrics)
+## Key Metrics ![See here](metrics.png)
 - Total Swift files: 86
 - Lines of code (LoC): 2970
 - Average LoC: 42
