@@ -40,6 +40,7 @@ struct UserListSuccessView: View {
                         }
                 }
             }
+            .listStyle(.plain)
             .task {
                 await viewModel.getBlacklistedUsers()
             }

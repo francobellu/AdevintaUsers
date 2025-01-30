@@ -6,7 +6,7 @@ struct UsersResponseDTO: Codable {
 }
 
 extension UsersResponseDTO {
-    func toUsers() -> [User] {
+    func toDomain() -> [User] {
         results.map{$0.toDomain()}
     }
 }

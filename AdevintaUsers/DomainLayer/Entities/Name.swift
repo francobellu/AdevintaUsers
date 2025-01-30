@@ -1,15 +1,7 @@
 import Foundation
 
-struct Name {
+struct Name: Codable, Hashable {
+    let title: String
     let first: String
     let last: String
-}
-
-extension Name: Identifiable, Hashable {
-    var id: String { first + "::" + last }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(first)
-        hasher.combine(last)
-    }
 }

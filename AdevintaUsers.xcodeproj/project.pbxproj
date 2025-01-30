@@ -10,7 +10,6 @@
 		C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */; };
 		C7672AF92D49253B0003384C /* MockUserDefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */; };
 		C7672B052D4995450003384C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C7672B042D4995450003384C /* README.md */; };
-		C7672B092D4A29950003384C /* Screenshot 2025-01-29 at 10.16.03.png in Resources */ = {isa = PBXBuildFile; fileRef = C7672B082D4A29950003384C /* Screenshot 2025-01-29 at 10.16.03.png */; };
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
@@ -49,7 +48,6 @@
 		C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAdapterTests.swift; sourceTree = "<group>"; };
 		C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsAdapter.swift; sourceTree = "<group>"; };
 		C7672B042D4995450003384C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		C7672B082D4A29950003384C /* Screenshot 2025-01-29 at 10.16.03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2025-01-29 at 10.16.03.png"; sourceTree = "<group>"; };
 		C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdevintaUsersTests.xctestplan; sourceTree = "<group>"; };
 		C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdevintaUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,7 +143,6 @@
 		C7D7B8872D41A6E700AC4E79 = {
 			isa = PBXGroup;
 			children = (
-				C7672B082D4A29950003384C /* Screenshot 2025-01-29 at 10.16.03.png */,
 				C7672B042D4995450003384C /* README.md */,
 				C7D7B8922D41A6E700AC4E79 /* AdevintaUsers */,
 				C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */,
@@ -375,7 +372,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7672B052D4995450003384C /* README.md in Resources */,
-				C7672B092D4A29950003384C /* Screenshot 2025-01-29 at 10.16.03.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,17 +1,6 @@
 import Foundation
 
-struct UserId{
+struct UserId: Codable, Hashable {
     let name: String
     let value: String
-}
-
-extension UserId: Identifiable, Hashable {
-    var id: String {
-        name + "::" + value
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(value)
-    }
 }

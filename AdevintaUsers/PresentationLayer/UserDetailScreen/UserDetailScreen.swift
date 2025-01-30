@@ -2,44 +2,37 @@ import SwiftUI
 
 struct UserDetailScreen: View {
     let user: User
+    let vSpacing = CGFloat(16)
     var body: some View {
-        if let url = URL(string: user.picture.large) {
-            ScrollView {
-                VStack(spacing: 20) {
-                    AsyncImage(url: url) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 200, height: 200)
-                    .clipShape(Circle())
-                    .shadow(radius: 10)
-
-                    VStack(spacing: 10) {
-                        Text("\(user.name.first) \(user.name.last)")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        Text("ID: \(user.userId.value) ")
-                            .font(.caption)
-
-                        Link(user.email, destination: URL(string: "mailto:\(user.email)")!)
-                            .font(.headline)
-                            .foregroundColor(.blue)
-
-                        Link(user.phone, destination: URL(string: "tel:\(user.phone)")!)
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                    }
-                    .padding()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                ProfileHeader(user: user)
+                    .padding(16)
+                Group {
+                    ContactInformationSection(user: user, vSpacing: vSpacing)
+                    LoginInformationSection(user: user, vSpacing: vSpacing)
+                    DemographicSection(user: user, vSpacing: vSpacing)
+                    LocationInformationSection(user: user, vSpacing: vSpacing)
+                    ImportantDatesSection(user: user, vSpacing: vSpacing)
                 }
-                .padding()
+                .frame(maxWidth: .infinity)
+                .padding(16)
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .clipped()
             }
+
+            .padding()
             .navigationBarTitleDisplayMode(.inline)
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
 }
+
+
+
+
+
 
 #Preview {
     let user = User.randomMock()

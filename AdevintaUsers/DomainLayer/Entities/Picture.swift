@@ -1,7 +1,6 @@
-struct Picture {
+struct Picture: Codable, Hashable {
     let large: String
+    let medium: String
+    let thumbnail: String
 }
 
-extension Picture: Identifiable, Hashable {
-    var id: String { large }
-}

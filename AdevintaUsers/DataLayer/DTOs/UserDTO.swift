@@ -1,44 +1,51 @@
 import Foundation
 
 struct UserDTO: Codable {
-    let id: UserIdDTO
+    let gender: String
     let name: NameDTO
+    let location: LocationDTO
     let email: String
+    let login: LoginDTO
+    let dob: DateInfoDTO
+    let registered: DateInfoDTO
     let phone: String
+    let cell: String
+    let id: UserIdDTO
     let picture: PictureDTO
+    let nat: String
+}
 
+extension UserDTO {
     init(from user: User) {
-        let userIdDTO = UserIdDTO(from: user.userId)
-        let nameDTO = NameDTO(from: user.name)
-        let pictureDTO = PictureDTO(from: user.picture)
-        self.id = userIdDTO
-        self.name = nameDTO
+        self.gender = user.gender
+        self.name = NameDTO(from: user.name)
+        self.location = LocationDTO(from: user.location)
         self.email = user.email
+        self.login = LoginDTO(from: user.login)
+        self.dob = DateInfoDTO(from: user.dob)
+        self.registered = DateInfoDTO(from: user.registered)
         self.phone = user.phone
-        self.picture = pictureDTO
+        self.cell = user.cell
+        self.id = UserIdDTO(from: user.userId)
+        self.picture = PictureDTO(from: user.picture)
+        self.nat = user.nationality
     }
 
     func toDomain() -> User {
         User(
-            userId: UserId(name: id.name, value: id.value ?? ""),
+            gender: gender,
             name: name.toDomain(),
-            email: email.lowercased(),
+            location: location.toDomain(),
+            email: email,
+            login: login.toDomain(),
+            dob: dob.toDomain(),
+            registered: registered.toDomain(),
             phone: phone,
-            picture: picture.toDomain()
+            cell: cell,
+            userId: id.toDomain(),
+            picture: picture.toDomain(),
+            nationality: nat
         )
     }
-}
 
-extension UserDTO {
-    static func randomMock() -> UserDTO {
-        let user = User.randomMock()
-        let userDTO = UserDTO(from: user)
-        return userDTO
-    }
-
-    static func randomMocks(num: Int) -> [UserDTO] {
-        let users = User.randomMocks(num: num)
-        let userDTOs = users.map { UserDTO(from: $0) }
-        return userDTOs
-    }
 }
