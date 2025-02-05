@@ -4,6 +4,7 @@ import SwiftUI
 
 // MARK: Mocks
 extension User {
+
     static func randomMock() -> User {
         let genders = ["male", "female"]
         let titles = ["Mr.", "Mrs.", "Ms.", "Dr."]

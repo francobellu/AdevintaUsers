@@ -14,6 +14,8 @@ struct User: Identifiable{
     let userId: UserId
     let picture: Picture
     let nationality: String
+
+    var isBlacklisted: Bool = false
 }
 
 extension User: Equatable, Hashable  {

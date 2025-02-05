@@ -5,7 +5,7 @@ final class GetDeletedUserUseCase: GetDeletedUserUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func execute() -> [User] {
-        return userRepository.loadBlacklist()
+    func execute(users: [User]) -> [User] {
+        users.filter { $0.isBlacklisted }
     }
 }

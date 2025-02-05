@@ -10,6 +10,7 @@
 		C7672AF52D48DEF80003384C /* UserDefaultsAdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF32D48DEEC0003384C /* UserDefaultsAdapterTests.swift */; };
 		C7672AF92D49253B0003384C /* MockUserDefaultsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */; };
 		C7672B052D4995450003384C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C7672B042D4995450003384C /* README.md */; };
+		C7D0DDD42D53D07600F41996 /* User+Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D0DDD32D53D07600F41996 /* User+Mocks.swift */; };
 		C7E6E1042D468EA70056AE35 /* DeleteUserUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */; };
 		C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */; };
 		C7E6E16D2D46CF190056AE35 /* FetchUsersUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */; };
@@ -49,6 +50,7 @@
 		C7672AF82D49253B0003384C /* MockUserDefaultsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaultsAdapter.swift; sourceTree = "<group>"; };
 		C7672B042D4995450003384C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C76942722D42B6F6000033EE /* AdevintaUsersTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AdevintaUsersTests.xctestplan; sourceTree = "<group>"; };
+		C7D0DDD32D53D07600F41996 /* User+Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Mocks.swift"; sourceTree = "<group>"; };
 		C7D7B8902D41A6E700AC4E79 /* AdevintaUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdevintaUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8A02D41A6E900AC4E79 /* AdevintaUsersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D7B8AA2D41A6E900AC4E79 /* AdevintaUsersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdevintaUsersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,14 @@
 			path = UserDefaults;
 			sourceTree = "<group>";
 		};
+		C7D0DDD22D53CFCC00F41996 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				C7D0DDD32D53D07600F41996 /* User+Mocks.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		C7D7B8872D41A6E700AC4E79 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +189,7 @@
 		C7E6E1022D468E8C0056AE35 /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C7D0DDD22D53CFCC00F41996 /* Mocks */,
 				C7E6E16C2D46CF170056AE35 /* FetchUsersUseCaseTests.swift */,
 				C7E6E1602D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift */,
 				C7E6E1032D468EA70056AE35 /* DeleteUserUseCaseTests.swift */,
@@ -418,6 +429,7 @@
 				C7E6E2AA2D47C6CF0056AE35 /* ApiClientTests.swift in Sources */,
 				C7E6E2AB2D47C6CF0056AE35 /* MockURLSession.swift in Sources */,
 				C7E6E2AC2D47C6CF0056AE35 /* HTTPClientTests.swift in Sources */,
+				C7D0DDD42D53D07600F41996 /* User+Mocks.swift in Sources */,
 				C7E6E1612D46A3220056AE35 /* RemoveDuplicatedUsersUseCaseTests.swift in Sources */,
 				C7E6E17A2D46E0700056AE35 /* UserRepositoryTests.swift in Sources */,
 			);

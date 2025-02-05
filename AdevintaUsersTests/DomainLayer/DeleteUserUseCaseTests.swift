@@ -11,21 +11,19 @@ struct DeleteUserUseCaseTests {
         sut = DeleteUserUseCase(userRepository: userRepository)
     }
 
-    @Test("test deletion of one user from a list of users reduces its size by one")
+    @Test("test deletion of one user from a list of users returns a new list with the user markes as deleted")
     func test_execute() async throws {
         // Given
         let users = User.randomMocks(num: 10)
-        let user = users.first!
-        userRepository.userStubs = .success([user])
+        let userToDelete = users.first!
 
         // When
-        let result = sut.execute(user, users: users)
+        let result = sut.execute(userToDelete, users: users)
 
         // Them
-        var newUsers = users
-        let userIndex = newUsers.firstIndex(of: user)!
-        newUsers.remove(at: userIndex)
-        #expect(newUsers == result)
+        let userIndex = result.firstIndex(of: userToDelete)!
+        let user = result[userIndex]
+        #expect(user.isBlacklisted == true, "User should be deleted")
     }
 }
 

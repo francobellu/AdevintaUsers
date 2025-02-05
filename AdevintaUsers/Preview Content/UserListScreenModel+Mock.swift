@@ -8,8 +8,8 @@ extension UserListScreenModel {
 
         let mockDeleteUserUseCase = MockDeleteUserUseCase()
         let mockGetDeleteUserUseCase = MockGetDeletedUserUseCase()
-        let removeDuplicatedUsersUseCase = RemoveDuplicatedUsersUseCase()
-        
+        let removeDuplicatedUsersUseCase = MockRemoveDuplicatedUsersUseCase()
+
         return UserListScreenModel(
             usersPerBatch: 7,
             fetchUsersUseCase: mockFetchUsersUseCase,

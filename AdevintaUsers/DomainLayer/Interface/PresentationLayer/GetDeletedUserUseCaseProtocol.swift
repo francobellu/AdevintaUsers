@@ -1,3 +1,3 @@
 protocol GetDeletedUserUseCaseProtocol {
-    func execute() -> [User]
+    func execute(users: [User]) -> [User]
 }

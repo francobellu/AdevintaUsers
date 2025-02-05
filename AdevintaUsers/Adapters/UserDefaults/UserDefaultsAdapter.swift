@@ -21,13 +21,11 @@ final class UserDefaultsAdapter: UserDefaultsAdapterProtocol {
         self.defaults = defaults
     }
 
-    // Store users ( overwrites existing)
     func save(_ users: [UserDTO], for key: Key) {
         let encodedData = try? JSONEncoder().encode(users)
         defaults.set(encodedData, forKey: key.rawValue)
     }
 
-    // Retrieve users
     func getUsers(for key: Key) -> [UserDTO] {
         guard let data = defaults.data(forKey: key.rawValue),
               let users = try? JSONDecoder().decode([UserDTO].self, from: data) else {

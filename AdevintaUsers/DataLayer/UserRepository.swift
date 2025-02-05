@@ -3,7 +3,7 @@ import Foundation
 final class UserRepository: UserRepositoryProtocol {
     let apiClient: ApiClientProtocol
     let userDefaultsAdapter: UserDefaultsAdapterProtocol
-
+    
     init(apiClient: ApiClientProtocol, userDefaultsAdapter: UserDefaultsAdapterProtocol) {
         self.apiClient = apiClient
         self.userDefaultsAdapter = userDefaultsAdapter
@@ -30,6 +30,11 @@ final class UserRepository: UserRepositoryProtocol {
         return users
     }
 
+    func updateUser(_ users: [User]) {
+        let usersDTO =  users.map{ UserDTO(from: $0)}
+        userDefaultsAdapter.save(usersDTO, for: .uniqueUsers)
+    }
+    
     func addToBlacklist(user: User) {
         let userDTO = UserDTO(from: user)
 

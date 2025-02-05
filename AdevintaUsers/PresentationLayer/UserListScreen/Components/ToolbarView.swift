@@ -4,8 +4,8 @@ struct ToolbarView: View {
     let usersCount: Int
     let isTyping: Bool
 
-    let duplicateUsers: [User]
-    let blacklistedUsers: [User]
+    let duplicateUsers: () -> ([User])
+    let blacklistedUsers: () -> ([User])
 
 
     @Binding var isAllSearch: Bool
@@ -50,14 +50,14 @@ struct ToolbarView: View {
         .sheet(isPresented: $showingDuplicates) {
             ModalView(
                 title: "Duplicate Users",
-                users: duplicateUsers,
+                users: duplicateUsers(),
                 isPresented: $showingDuplicates
             )
         }
         .sheet(isPresented: $showingBlacklist) {
             ModalView(
                 title: "Blacklisted Users",
-                users: blacklistedUsers,
+                users: blacklistedUsers(),
                 isPresented: $showingBlacklist
             )
         }
@@ -68,8 +68,8 @@ struct ToolbarView: View {
     ToolbarView(
         usersCount: 10,
         isTyping: true,
-        duplicateUsers: User.randomMocks(num: 2),
-        blacklistedUsers: User.randomMocks(num: 2),
+        duplicateUsers: {User.randomMocks(num: 2)},
+        blacklistedUsers: {User.randomMocks(num: 2)},
         isAllSearch: .constant(false),
         showingDuplicates: .constant(false),
         showingBlacklist: .constant(false)
@@ -80,8 +80,8 @@ struct ToolbarView: View {
     ToolbarView(
         usersCount: 10,
         isTyping: false,
-        duplicateUsers: User.randomMocks(num: 2),
-        blacklistedUsers: User.randomMocks(num: 2),
+        duplicateUsers: {User.randomMocks(num: 2)},
+        blacklistedUsers: {User.randomMocks(num: 2)},
         isAllSearch: .constant(true),
         showingDuplicates: .constant(false),
         showingBlacklist: .constant(false)

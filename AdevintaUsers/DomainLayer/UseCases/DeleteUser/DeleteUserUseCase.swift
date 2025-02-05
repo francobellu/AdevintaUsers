@@ -6,12 +6,12 @@ final class DeleteUserUseCase: DeleteUserUseCaseProtocol {
     }
 
     func execute(_ user: User, users: [User]) -> [User] {
-        var result = users
-
-        let userIndex = result.firstIndex(of: user)!
-        result.remove(at: userIndex)
-
-        userRepository.addToBlacklist(user: user)
-        return result
+        var newUsers = users
+        if let userIndex = newUsers.firstIndex(of: user) {
+            // Mark the user as deleted and update user's list in the repo
+            newUsers[userIndex].isBlacklisted = true
+            userRepository.updateUser(newUsers)
+        }
+        return newUsers
     }
 }

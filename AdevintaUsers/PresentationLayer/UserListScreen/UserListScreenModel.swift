@@ -21,7 +21,6 @@ final class UserListScreenModel: ObservableObject {
     @Published var asyncOp: AsyncOperation<[User]>?
     @Published var users: [User] = []
     @Published var duplicatedUsers: [User] = []
-    @Published var blacklistedUsers: [User] = []
     @Published var searchTerm = ""
     @Published var selectedUser: User?
     @Published var isAllSearch = true
@@ -66,12 +65,12 @@ final class UserListScreenModel: ObservableObject {
             asyncOp = .inProgress
             let initialLoad = users.isEmpty
             let newUsers = try await fetchUsersUseCase.execute(batchSize: usersPerBatch, initialLoad: initialLoad)
-            users.append(contentsOf: newUsers)
+            users.append(contentsOf: newUsers) 
 
             let (uniqueUsers, duplicates) = removeDuplicatedUsersUseCase.execute(users: users)
 
             // Filter out blacklisted users from uniqueUsers
-            blacklistedUsers = getDeletedUserUseCase.execute()
+            let blacklistedUsers = getDeletedUserUseCase.execute(users: users)
             let filteredUniqueUsers = uniqueUsers.filter { user in
                 !blacklistedUsers.contains { blacklistedUser in
                     blacklistedUser.id == user.id
@@ -89,15 +88,9 @@ final class UserListScreenModel: ObservableObject {
         }
     }
 
-    func getBlacklistedUsers() async {
-        blacklistedUsers = getDeletedUserUseCase.execute()
-    }
-
     func deleteUser(_ user: User) async {
         users = deleteUserUseCase.execute(user, users: users)
-        await getBlacklistedUsers()
     }
-
 
     var filteredUsers: [User] {
         guard !searchTerm.isEmpty else { return users }
@@ -112,16 +105,6 @@ final class UserListScreenModel: ObservableObject {
             }
 
             return isAllSearch ? searchTerms.allSatisfy(matches) : searchTerms.contains(where: matches)
-        }
-    }
-
-    var displayedUsers: [User] {
-        if showingDuplicates {
-            return duplicatedUsers
-        } else if showingBlacklist {
-            return blacklistedUsers
-        } else {
-            return filteredUsers
         }
     }
 }

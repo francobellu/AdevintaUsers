@@ -6,10 +6,10 @@ struct UserListSuccessView: View {
     var body: some View {
         VStack {
             ToolbarView(
-                usersCount: viewModel.filteredUsers.count,
+                usersCount: viewModel.filteredUsers.filter{ !$0.isBlacklisted }.count,
                 isTyping: viewModel.isTyping,
-                duplicateUsers: viewModel.duplicatedUsers,
-                blacklistedUsers: viewModel.blacklistedUsers,
+                duplicateUsers: {viewModel.duplicatedUsers},
+                blacklistedUsers: { viewModel.users.filter { $0.isBlacklisted } },
                 isAllSearch: $viewModel.isAllSearch,
                 showingDuplicates: $viewModel.showingDuplicates,
                 showingBlacklist: $viewModel.showingBlacklist
@@ -17,7 +17,7 @@ struct UserListSuccessView: View {
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity)
             List {
-                ForEach(viewModel.filteredUsers ) { user in
+                ForEach(viewModel.filteredUsers.filter{ !$0.isBlacklisted} ) { user in
                     UserRowView(user: user)
                         .onTapGesture {
                             viewModel.selectedUser = user
@@ -41,9 +41,9 @@ struct UserListSuccessView: View {
                 }
             }
             .listStyle(.plain)
-            .task {
-                await viewModel.getBlacklistedUsers()
-            }
+//            .task {
+//                viewModel.users.filter { $0.isBlacklisted }
+//            }
             .searchable(
                 text: $viewModel.searchTerm,
                 prompt: viewModel.searchBarStr

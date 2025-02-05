@@ -1,17 +1,10 @@
 @testable import AdevintaUsers
 import Testing
+import Foundation
 
-@Suite("DeleteUserUseCase Tests")
+@Suite("RemoveDuplicatedUsersUseCase Tests")
 struct RemoveDuplicatedUsersUseCaseTests {
     let sut: RemoveDuplicatedUsersUseCase
-
-    // Stubs
-    let userJohnDoe =                  User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentId =      User(userId: UserId(name: "John", value: "BBB"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentName =    User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Smith"), email: "john@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentEmail =   User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "johnAA@example.com", phone: "12", picture: Picture(large: "xxx"))
-    let userJohnDoe_differentTel =     User(userId: UserId(name: "John", value: "AAA"), name: Name(first: "John", last: "Doe"), email: "john@example.com", phone: "99", picture: Picture(large: "xxx"))
-
 
     init() {
         sut = RemoveDuplicatedUsersUseCase()
@@ -20,7 +13,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
     @Test("test that with users with 2 exactly same, one is removed")
     func test_execute_exactlySameUserIsRemoved() async throws {
         // Given
-        var users: [User] = [userJohnDoe, userJohnDoe]
+        var users: [User] = [.userJohnDoe(), .userJohnDoe()]
         let initialUserCount = users.count
         try #require(users.count == initialUserCount)
 
@@ -37,7 +30,7 @@ struct RemoveDuplicatedUsersUseCaseTests {
     @Test("test_execute_userWithDifferentIdIsNotRemoved")
     func test_execute_userWithDifferentIdIsNotRemoved() async throws {
         // Given
-        var users: [User] = [userJohnDoe, userJohnDoe_differentId]
+        var users: [User] = [.userJohnDoe(), .userJohnDoe_differentId()]
         let initialUserCount = users.count
         try #require(users.count == initialUserCount)
 
@@ -50,10 +43,10 @@ struct RemoveDuplicatedUsersUseCaseTests {
         #expect(duplicates.count == 0)
     }
 
-    @Test("")
-    func test_execute_userWithDifferentEmailIsNoRemoved() async throws {
+    @Test("test_execute_userWithDifferentEmailIsRemoved") // still same login.uuid
+    func test_execute_userWithDifferentEmailIsRemoved() async throws {
         // Given
-        var users: [User] = [userJohnDoe, userJohnDoe_differentEmail]
+        var users: [User] = [.userJohnDoe(), .userJohnDoe_differentEmail()]
         let initialUserCount = users.count
         try #require(users.count == initialUserCount)
 
@@ -62,14 +55,14 @@ struct RemoveDuplicatedUsersUseCaseTests {
         users = uniqueUsers
 
         // Them
-        #expect(users.count == initialUserCount)
-        #expect(duplicates.count == 0)
+        #expect(users.count == initialUserCount - 1)
+        #expect(duplicates.count == 1)
     }
 
-    @Test("test_execute_userWithDifferentNameIsNoRemoved")
-    func test_execute_userWithDifferentNameIsNoRemoved() async throws {
+    @Test("test_execute_userWithDifferentNameIsNoRemoved") // still same login.uuid
+    func test_execute_userWithDifferentNameIsRemoved() async throws {
         // Given
-        var users: [User] = [userJohnDoe, userJohnDoe_differentName]
+        var users: [User] = [.userJohnDoe(), .userJohnDoe_differentName()]
         let initialUserCount = users.count
         try #require(users.count == initialUserCount)
 
@@ -78,14 +71,14 @@ struct RemoveDuplicatedUsersUseCaseTests {
         users = uniqueUsers
 
         // Them
-        #expect(users.count == initialUserCount)
-        #expect(duplicates.count == 0)
+        #expect(users.count == initialUserCount - 1)
+        #expect(duplicates.count == 1)
     }
 
-    @Test("test_execute_userWithDifferentTelephoneIsRemoved")
+    @Test("test_execute_userWithDifferentTelephoneIsRemoved") // still same login.uuid
     func test_execute_userWithDifferentTelephoneIsRemoved() async throws {
         // Given
-        var users: [User] = [userJohnDoe, userJohnDoe_differentTel]
+        var users: [User] = [.userJohnDoe(), .userJohnDoe_differentTel()]
         let initialUserCount = users.count
         try #require(users.count == initialUserCount)
 
@@ -98,4 +91,3 @@ struct RemoveDuplicatedUsersUseCaseTests {
         #expect(duplicates.count == 1)
     }
 }
-

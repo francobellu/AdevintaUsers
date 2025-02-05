@@ -1,6 +1,8 @@
 import Foundation
 
 class MockUserRepository: UserRepositoryProtocol, @unchecked  Sendable {
+    func updateUser(_ users: [User]) {
+    }
     
     var userStubs: Result< [User], UserRepositoryError>!
 
