@@ -34,3 +34,7 @@ struct ProfileHeader: View {
         .frame(maxWidth: .infinity)
     }
 }
+
+#Preview {
+    ProfileHeader(user: .randomMock())
+}

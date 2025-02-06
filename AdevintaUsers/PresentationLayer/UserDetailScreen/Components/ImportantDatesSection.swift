@@ -14,3 +14,10 @@ struct ImportantDatesSection: View {
         }
     }
 }
+
+#Preview {
+    ImportantDatesSection(
+        user: User.randomMock(),
+        vSpacing: 10
+    )
+}

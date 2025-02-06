@@ -13,3 +13,10 @@ struct DemographicSection: View {
         }
     }
 }
+
+#Preview {
+    DemographicSection(
+        user: User.randomMock(),
+        vSpacing: 10
+    )
+}

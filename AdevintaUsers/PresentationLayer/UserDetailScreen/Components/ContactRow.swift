@@ -19,3 +19,11 @@ struct ContactRow: View {
         }
     }
 }
+
+#Preview {
+    ContactRow(
+        label: "Email",
+        value: "example@example.com",
+        icon: "envelope"
+    )
+}

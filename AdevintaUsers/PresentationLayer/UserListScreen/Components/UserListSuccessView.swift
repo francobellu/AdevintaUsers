@@ -41,9 +41,6 @@ struct UserListSuccessView: View {
                 }
             }
             .listStyle(.plain)
-//            .task {
-//                viewModel.users.filter { $0.isBlacklisted }
-//            }
             .searchable(
                 text: $viewModel.searchTerm,
                 prompt: viewModel.searchBarStr

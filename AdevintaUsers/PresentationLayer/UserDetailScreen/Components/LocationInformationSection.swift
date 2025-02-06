@@ -20,3 +20,10 @@ struct LocationInformationSection: View {
         }
     }
 }
+
+#Preview {
+    LocationInformationSection(
+        user: User.randomMock(),
+        vSpacing: 16.0
+    )
+}

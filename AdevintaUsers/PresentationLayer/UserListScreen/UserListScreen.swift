@@ -39,7 +39,7 @@ struct UserListScreen: View {
 }
 
 #Preview("Empty users") {
-    let users: [User] = []
+    let users: [User] = User.randomMocks(num: 7)
     let usersResult =  Result<[User], UserListScreenModelError> .success(users)
     UserListScreen(viewModel: .previewMock(usersResult: usersResult))
 }

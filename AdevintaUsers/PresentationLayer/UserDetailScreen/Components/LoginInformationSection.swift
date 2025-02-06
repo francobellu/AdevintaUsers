@@ -29,3 +29,10 @@ struct LoginInformationSection: View {
         }
     }
 }
+
+#Preview {
+    LoginInformationSection(
+        user: .randomMock(),
+        vSpacing: 16.0
+    )
+}

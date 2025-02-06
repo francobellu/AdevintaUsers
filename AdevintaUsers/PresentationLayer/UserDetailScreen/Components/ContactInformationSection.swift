@@ -15,3 +15,9 @@ struct ContactInformationSection: View {
         }
     }
 }
+#Preview {
+    ContactInformationSection(
+        user: User.randomMock(),
+        vSpacing: 16
+    )
+}

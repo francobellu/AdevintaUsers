@@ -14,3 +14,15 @@ struct DateRow: View {
         }
     }
 }
+
+#Preview {
+    let label = "Birthdate"
+    let date = DateInfo(
+        date: Date(),
+        age: 30
+    )
+    DateRow(
+        label: label,
+        dateInfo: date
+    )
+}
