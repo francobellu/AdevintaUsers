@@ -36,7 +36,7 @@ struct UserListSuccessView: View {
                     Circle()
                         .foregroundColor(.clear)
                         .task {
-                            await viewModel.loadUsers()
+                            await viewModel.onEndListReached()
                         }
                 }
             }

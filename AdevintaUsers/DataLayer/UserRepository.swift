@@ -25,7 +25,9 @@ final class UserRepository: UserRepositoryProtocol {
 
         // Save new users to cache
         let newUserDTOs = users.map(UserDTO.init)
-        userDefaultsAdapter.save(newUserDTOs, for: .uniqueUsers)
+        var existingCachedUsers = userDefaultsAdapter.getUsers(for: .uniqueUsers)
+        existingCachedUsers.append(contentsOf: newUserDTOs)
+        userDefaultsAdapter.save(existingCachedUsers, for: .uniqueUsers)
 
         return users
     }

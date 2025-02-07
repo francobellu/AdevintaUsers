@@ -58,6 +58,12 @@ final class UserListScreenModel: ObservableObject {
         self.removeDuplicatedUsersUseCase = removeDuplicatedUsersUseCase
     }
 
+    func onEndListReached() async {
+        if searchTerm.isEmpty {
+            await loadUsers()
+        }
+    }
+
     func loadUsers() async {
         if case .inProgress = asyncOp { return }
         hasMorePages = true
